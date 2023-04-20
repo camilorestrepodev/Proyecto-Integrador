@@ -66,6 +66,111 @@ El proyecto está organizado en cuatro paquetes principales, cada uno correspond
 - paquete-service: Contiene los controladores, servicios, DTOs y repositorios relacionados con el microservicio de Paquetes.
 Además, hay un paquete adicional llamado common que contiene clases y utilidades compartidas por los microservicios.
 
+## Microservicios
+Este proyecto está dividido en tres microservicios diferentes: Cliente, Habitación y Reserva. Cada microservicio tiene su propia base de datos y API REST. La comunicación entre los microservicios se realiza a través de peticiones HTTP.
+
+#### Cliente Microservicio
+Endpoints:
+- **POST /clientes** - Crea un nuevo cliente
+```java
+{
+"cedula": 12345,
+"nombre":"Mateo",
+"apellido":"Zapata",
+"correoElectronico" : "mateo@gmail.com",
+"direccion" :"calle 46 # 69-90",
+"edad" : 18,
+"correo" : "mateo@gmail.com"
+}
+```
+
+#### Habitación Microservicio
+Endpoints:
+- **POST /habitaciones** - Crea una nueva habitación
+```java
+{
+    "numero": 1,
+    "tipoHabitacion": "PREMIUM",
+    "precioBase": 25000
+}
+```
+
+#### Reserva Microservicio
+Endpoints:
+- **POST /reservar** - Crea una nueva habitación
+  Ejemplo de petición:
+
+``(http://localhost:8084/api/v1/reservar/?numero=10&fecha=25-08-2023&cedula=12345)``
+
+Respuesta de petición:
+```java
+{
+    "fechaReserva": "2023-08-25",
+    "numero": 99,
+    "codigoReserva": 27,
+    "totalPago": 750
+}
+```
+
+- **GET /reservas/{cedula}** - Obtener lista de reservas por cedula
+
+Ejemplo de petición:
+
+``(http://localhost:8084/api/v1/reservas/12345)``
+
+```java
+[
+     {
+        "fechaReserva": "2023-08-25",
+        "habitacion": {
+            "numero": 99,
+            "tipoHabitacion": "PREMIUM",
+            "precioBase": 15000
+        },
+        "cliente": {
+            "nombre": "Mateo",
+            "apellido": "Zapata",
+            "cedula": 123,
+            "direccion": "mateo@gmail.com",
+            "edad": 18,
+            "email": "calle 46 # 69-90"
+        },
+        "codigoReserva": 27,
+        "totalPago": 750
+    }
+]
+```
+
+- **GET /disponibles/{fecha}** - Obtener lista de habitaciones disponibles por fecha
+
+Ejemplo de petición:
+
+``(http://localhost:8084/api/v1/disponibles/25-08-2023)``
+
+- **GET /disponibles/habitacion** - Obtener lista de habitaciones por tipo y fecha
+
+Ejemplo de petición:
+
+``(http://localhost:8084/api/v1/disponibles/habitacion?tipo=premium&fecha=28-03-2023)``
+
+```java
+[
+    {
+        "numero": 11,
+        "tipoHabitacion": "premium",
+        "precioBase": 20500
+    },
+    {
+        "numero": 12,
+        "tipoHabitacion": "premium",
+        "precioBase": 20500
+    }
+]
+```
+## Pruebas Unitarias <img alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
+Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
+Las pruebas unitarias se encuentran en la carpeta src/test/java del proyecto.
+
 ## Integración continua con GitHub
 Este proyecto cuenta con integración continua mediante Github Actions. Cada vez que se realiza un push al repositorio, se ejecutan las pruebas unitarias y se crea un archivo JAR ejecutable.
 
