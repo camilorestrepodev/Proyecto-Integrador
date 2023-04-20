@@ -26,8 +26,8 @@ Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para tran
 
 ## Diagrama del Modelo Entidad-Relación
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
-![diagrama](https://user-images.githubusercontent.com/115324147/233474008-48efe260-b188-4d41-a37e-1d549b7a1b3d.png)
-)
+![diagrama](https://user-images.githubusercontent.com/115324147/233474989-9cd47201-753f-4145-88af-3950500ec8e6.png)
+
 
 - La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, direccion, edad y correo electronico.
 - La tabla **Habitación** contiene información sobre las habitaciones, como el numero, precio y tipo.
