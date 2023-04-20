@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class EnvioController {
-    private EnvioService envioService;
+    private final EnvioService envioService;
 
     @Autowired
     public EnvioController(EnvioService envioService) {

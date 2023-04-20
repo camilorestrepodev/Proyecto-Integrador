@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping("api/v1/")
 public class ClienteController {
 
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
     @Autowired
     public ClienteController(ClienteService clienteService) {

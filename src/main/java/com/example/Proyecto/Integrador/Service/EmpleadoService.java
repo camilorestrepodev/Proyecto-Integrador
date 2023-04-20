@@ -1,12 +1,11 @@
 package com.example.Proyecto.Integrador.Service;
 
-import com.example.Proyecto.Integrador.Model.Cliente;
+import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import com.example.Proyecto.Integrador.Model.Empleado;
 import com.example.Proyecto.Integrador.Repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,7 +35,7 @@ public class EmpleadoService {
             empleadoActualizado.setCiudad(empleado.getCiudad());
             return empleadoRepository.save(empleadoActualizado);
         } else {
-            return null;
+            throw new ApiRequestException("No se encontró un empleado con la cédula" + cedula);
         }
     }
 

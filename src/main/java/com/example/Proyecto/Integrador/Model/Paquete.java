@@ -1,8 +1,12 @@
 package com.example.Proyecto.Integrador.Model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Getter @Setter
 @Entity
 @Table(name = "paquetes")
 public class Paquete implements Serializable {
@@ -25,23 +29,14 @@ public class Paquete implements Serializable {
         this.valorDeclarado = valorDeclarado;
     }
 
-    public Integer getIdPaquete() {
-        return idPaquete;
+    public String asignarTipoPaquete(Double peso) {
+        if (peso < 2.0) {
+            return "LIVIANO";
+        } else if (peso > 2.0 && peso < 5.0) {
+            return "MEDIANO";
+        }
+        return "GRANDE";
     }
 
-    public String getTipoPaquete() {
-        return tipoPaquete;
-    }
 
-    public Double getPeso() {
-        return peso;
-    }
-
-    public Integer getValorDeclarado() {
-        return valorDeclarado;
-    }
-
-    public void setTipoPaquete(String tipoPaquete) {
-        this.tipoPaquete = tipoPaquete;
-    }
 }

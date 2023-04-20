@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaqueteService {
 
-    private PaqueteRepository paqueteRepository;
+    private final PaqueteRepository paqueteRepository;
 
     @Autowired
     public PaqueteService(PaqueteRepository paqueteRepository) {
@@ -18,4 +18,6 @@ public class PaqueteService {
     public Paquete crearPaquete(Paquete paquete){
         return this.paqueteRepository.save(paquete);
     }
+
+
 }

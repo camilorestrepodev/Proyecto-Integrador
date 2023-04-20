@@ -1,5 +1,6 @@
 package com.example.Proyecto.Integrador.Service;
 
+import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import com.example.Proyecto.Integrador.Model.Cliente;
 import com.example.Proyecto.Integrador.Model.Empleado;
 import com.example.Proyecto.Integrador.Repository.ClienteRepository;
@@ -36,7 +37,7 @@ public class ClienteService {
             clienteActualizado.setCiudad(cliente.getCiudad());
             return clienteRepository.save(clienteActualizado);
         } else {
-            return null;
+            throw new ApiRequestException("No se encontró un cliente con la cédula" + cedula);
         }
     }
 

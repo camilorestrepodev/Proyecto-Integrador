@@ -10,7 +10,6 @@ public class Cliente extends Persona{
     public Cliente() {
     }
 
-    // cliente
     public Cliente(Integer cedula, String nombre, String apellido, Long celular, String correoElectronico, String direccion, String ciudad) {
         super(cedula, nombre, apellido, celular, correoElectronico, direccion, ciudad);
     }

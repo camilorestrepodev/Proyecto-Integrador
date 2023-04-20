@@ -1,11 +1,16 @@
 package com.example.Proyecto.Integrador.Model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "empleados")
 public class Empleado extends Persona implements Serializable {
@@ -22,17 +27,6 @@ public class Empleado extends Persona implements Serializable {
         super(cedula, nombre, apellido, celular, correoElectronico, direccion, ciudad);
     }
 
-    public LocalDate getAntiguedad() {
-        return antiguedad;
-    }
-
-    public String getTipoSangre() {
-        return tipoSangre;
-    }
-
-    public String getTipoEmpleado() {
-        return tipoEmpleado;
-    }
 }
 
 

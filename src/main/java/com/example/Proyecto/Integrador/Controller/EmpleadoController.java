@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequestMapping("api/v1/")
 public class EmpleadoController {
 
-    public EmpleadoService empleadoService;
+    private final EmpleadoService empleadoService;
 
     @Autowired
     public EmpleadoController(EmpleadoService empleadoService) {

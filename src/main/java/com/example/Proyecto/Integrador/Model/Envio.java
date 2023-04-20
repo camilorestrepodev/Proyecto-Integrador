@@ -1,6 +1,7 @@
 package com.example.Proyecto.Integrador.Model;
 
 
+import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,4 +48,19 @@ public class Envio implements Serializable {
         this.valorEnvio = valorEnvio;
         this.paquete = paquete;
     }
+
+
+    public static Integer asignarPrecioEnvio(String tipo) {
+        switch (tipo) {
+            case "GRANDE":
+                return 50000;
+            case "MEDIANO":
+                return 40000;
+            case "LIVIANO":
+                return 30000;
+            default:
+                throw new ApiRequestException("El tipo de paquete no corresponde");
+        }
+    }
+
 }

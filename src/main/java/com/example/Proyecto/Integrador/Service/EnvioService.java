@@ -21,10 +21,10 @@ import java.util.Optional;
 
 @Service
 public class EnvioService {
-    private EnvioRepository envioRepository;
-    private ClienteRepository clienteRepository;
-    private PaqueteRepository paqueteRepository;
-    private EmpleadoRepository empleadoRepository;
+    private final EnvioRepository envioRepository;
+    private final ClienteRepository clienteRepository;
+    private final PaqueteRepository paqueteRepository;
+    private final EmpleadoRepository empleadoRepository;
 
     @Autowired
     public EnvioService(EnvioRepository envioRepository, ClienteRepository clienteRepository, PaqueteRepository paqueteRepository, EmpleadoRepository empleadoRepository) {
@@ -43,11 +43,14 @@ public class EnvioService {
         }
         Optional<Cliente> clienteOptional = this.clienteRepository.findById(envioDto.getCedula());
         if (clienteOptional.isPresent()) {
-            Paquete paquete = new Paquete(asignarTipoPaquete(envioDto.getPeso()), envioDto.getPeso(), envioDto.getValorDeclarado());
+            Paquete paquete = new Paquete();
+            paquete.setTipoPaquete(paquete.asignarTipoPaquete(envioDto.getPeso()));
+            paquete.setPeso(envioDto.getPeso());
+            paquete.setValorDeclarado(envioDto.getValorDeclarado());
             this.paqueteRepository.save(paquete);
             Envio envio = new Envio(clienteOptional.get(), envioDto.getCiudadOrigen(), envioDto.getCiudadDestino(),
                     envioDto.getDireccionDestino(), envioDto.getNombrePersona(), envioDto.getNumeroPersona(),
-                    asignarHora(), "RECIBIDO", asignarPrecioEnvio(paquete.getTipoPaquete()), paquete
+                    asignarHora(), "RECIBIDO",Envio.asignarPrecioEnvio(paquete.getTipoPaquete()), paquete
             );
             Envio envio1 = this.envioRepository.save(envio);
             envioDto.setNumGuia(envio1.getNumGuia());
@@ -57,33 +60,14 @@ public class EnvioService {
         }
     }
 
-    public String asignarTipoPaquete(Double peso) {
-        if (peso < 2.0) {
-            return "LIVIANO";
-        } else if (peso > 2.0 && peso < 5.0) {
-            return "MEDIANO";
-        }
-        return "GRANDE";
-    }
 
-    public Integer asignarPrecioEnvio(String tipo) {
-        switch (tipo) {
-            case "GRANDE":
-                return 50000;
-            case "MEDIANO":
-                return 40000;
-            case "LIVIANO":
-                return 30000;
-            default:
-                throw new ApiRequestException("El tipo de paquete no corresponde");
-        }
-    }
 
     public String asignarHora() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
+
 
     public EnvioDto obtenerNumeroGuia(Integer numGuia) {
         Optional<Envio> envio = this.envioRepository.findById(numGuia);
@@ -107,7 +91,7 @@ public class EnvioService {
                 celular, peso, valorDeclarado);
         envioDto.setNumGuia(numeroGuia);
         String estadoEnvio = envio.get().getEstadoEnvio();
-        if(estadoEnvio.equals("RECIBIDO")){
+        if (estadoEnvio.equals("RECIBIDO")) {
             envio.get().setEstadoEnvio("EN RUTA");
             envioDto.setEstadoEnvio("EN RUTA");
             this.envioRepository.save(envio.get());
@@ -118,6 +102,7 @@ public class EnvioService {
         return envioDto;
     }
 
+
     public EnvioDto actualizarEstadoPaquete(EnvioDto envioDto) {
         Integer cedula = envioDto.getCedula();
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
@@ -127,7 +112,7 @@ public class EnvioService {
         String tipoEmpleado = empleado.get().getTipoEmpleado();
         Integer numGuia = envioDto.getNumGuia();
         Optional<Envio> envioOptional = this.envioRepository.findById(numGuia);
-        if (!envioOptional.isPresent()){
+        if (!envioOptional.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
         }
         String estadoEnvio = envioDto.getEstadoEnvio();
@@ -140,7 +125,11 @@ public class EnvioService {
                 this.envioRepository.save(envioOptional.get());
             } else if (envioOptional.get().getEstadoEnvio().equals("RECIBIDO") && estadoEnvio.equals("ENTREGADO")) {
                 throw new ApiRequestException("el cambio de estado no cumple con las validaciones");
+            } else {
+                throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
             }
+        } else {
+            throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
         }
         EnvioDto envioDto1 = new EnvioDto();
         envioDto1.setNumGuia(envioOptional.get().getNumGuia());
@@ -148,9 +137,10 @@ public class EnvioService {
         return envioDto1;
     }
 
-    public List<Envio> filtrarPorEstado(String estadoEnvio, Integer cedula){
+
+    public List<Envio> filtrarPorEstado(String estadoEnvio, Integer cedula) {
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
-        if (!empleado.isPresent()){
+        if (!empleado.isPresent()) {
             throw new ApiRequestException("La cedula del empleado no existe");
         }
         return this.envioRepository.envioPorEstado(estadoEnvio);

@@ -1,9 +1,7 @@
 package com.example.Proyecto.Integrador.Dto;
 
-import com.sun.istack.NotNull;
 
 import java.io.Serializable;
-
 
 public class EnvioDto implements Serializable {
     private Integer numGuia;
