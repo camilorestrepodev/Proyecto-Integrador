@@ -1,6 +1,6 @@
-# Proyecto de Mensajería Express
+# Proyecto de Mensajería Express <img alt="Java" height="40" width="40" src="https://media.giphy.com/media/KeJXqoqlUE2NSHUYER/giphy.gif">
 
-Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Clientes, Empleados, Envíos y Paquetes. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
+Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Cliente, Empleado, Envío y Paquete. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
 
 ## Tecnologías utilizadas
 - Java: versión 11
@@ -11,9 +11,9 @@ Este es un proyecto de mensajería express que utiliza Java y Spring para crear 
 ## Configuración 
 Antes de comenzar, asegúrese de tener una base de datos configurada y actualice las credenciales de la base de datos en el archivo **application.properties**.
 ```java
-spring.datasource.url=jdbc:mysql://localhost:3306/sistemadereservas
+spring.datasource.url=jdbc:mysql://localhost:3306/proyectointegrador
 spring.datasource.username=root
-spring.datasource.password={password}
+spring.datasource.password=050509
 spring.jpa.hibernate.ddl-auto=update
 server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
@@ -23,6 +23,15 @@ La documentación de la API se genera automáticamente con Swagger. Para acceder
 
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
+
+## Diagrama del Modelo Entidad-Relación
+Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
+![diagrama](https://user-images.githubusercontent.com/115324147/233474008-48efe260-b188-4d41-a37e-1d549b7a1b3d.png)
+)
+
+- La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, direccion, edad y correo electronico.
+- La tabla **Habitación** contiene información sobre las habitaciones, como el numero, precio y tipo.
+- La tabla **Reserva** contiene información sobre las reservas, como el codigo de reserva, la cedula del cliente que la realizó, el numero de la habitación reservada y la fecha de la reserva y el total a pagar.
 
 ## Diagrama del proyecto por paquetes
 
@@ -60,10 +69,14 @@ com.example.Proyecto-Integrador
 
 El proyecto está organizado en cuatro paquetes principales, cada uno correspondiente a un microservicio:
 
-- cliente-service: Contiene los controladores, servicios, DTOs y repositorios relacionados con el microservicio de Clientes.
-- empleado-service: Contiene los controladores, servicios, DTOs y repositorios relacionados con el microservicio de Empleados.
-- envio-service: Contiene los controladores, servicios, DTOs y repositorios relacionados con el microservicio de Envíos.
-- paquete-service: Contiene los controladores, servicios, DTOs y repositorios relacionados con el microservicio de Paquetes.
+El paquete Configurer contiene las clases de configuración para la base de datos y Swagger.
+El paquete Controller contiene las clases controladoras para los microservicios de Cliente, Habitación y Reserva.
+El paquete Dto contiene las clases DTO (Data Transfer Object) para los objetos Cliente, Habitación y Reserva, que se utilizan para transferir datos entre la capa de presentación y la capa de servicios.
+El paquete Entity contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Habitación y Reserva, que se utilizan para mapear las tablas de la base de datos.
+El paquete Repository contiene las interfaces de repositorios JPA para los objetos Cliente, Habitación y Reserva, que se utilizan para interactuar con la base de datos.
+El paquete Service contiene las clases de servicios para los microservicios de Cliente, Habitación y Reserva, que contienen la lógica de negocio.
+La clase HotelAshirApplication es la clase principal del proyecto que se utiliza para iniciar la aplicación.
+
 Además, hay un paquete adicional llamado common que contiene clases y utilidades compartidas por los microservicios.
 
 ## Microservicios
