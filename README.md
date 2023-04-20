@@ -69,4 +69,5 @@ Además, hay un paquete adicional llamado common que contiene clases y utilidade
 ## Integración continua con GitHub
 Este proyecto cuenta con integración continua mediante Github Actions. Cada vez que se realiza un push al repositorio, se ejecutan las pruebas unitarias y se crea un archivo JAR ejecutable.
 
-
+## Despliegue del microservicio (Railway)
+Este proyecto cuenta con un despliegue del microservicio mediante Railway. Conecta directamente con Github y nuestra base de datos(MySQL).
