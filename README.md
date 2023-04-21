@@ -13,7 +13,7 @@ Antes de comenzar, asegúrese de tener una base de datos configurada y actualice
 ```java
 spring.datasource.url=jdbc:mysql://localhost:3306/proyectointegrador
 spring.datasource.username=root
-spring.datasource.password=050509
+spring.datasource.password=******
 spring.jpa.hibernate.ddl-auto=update
 server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
