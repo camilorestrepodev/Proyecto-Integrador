@@ -21,27 +21,31 @@ public class EmpleadoController {
         this.empleadoService = empleadoService;
     }
 
-    @PreAuthorize("hasRole('WRITE')")
+
     @PostMapping("/empleado")
+    @PreAuthorize("hasRole('WRITE')")
     public Empleado crearEmpleado (@RequestBody Empleado empleado){
         return this.empleadoService.crearEmpleado(empleado);
     }
 
-    @PreAuthorize("hasRole('WRITE')")
+
     @PutMapping("/empleado")
+    @PreAuthorize("hasRole('WRITE')")
     public Empleado actualizarEmpleado(@RequestBody Empleado empleado) {
         return empleadoService.actualizarEmpleado(empleado);
     }
 
-    @PreAuthorize("hasRole('WRITE')")
+
     @DeleteMapping("/empleado/{cedula}")
+    @PreAuthorize("hasRole('WRITE')")
     public String eliminarEmpleado(@PathVariable Integer cedula) {
         this.empleadoService.eliminarEmpleado(cedula);
         return "El empleado con cedula " + cedula + " fue eliminado con exito";
     }
 
-    @PreAuthorize("hasRole('READ')")
+
     @GetMapping("/empleado/{cedula}")
+    @PreAuthorize("hasRole('READ')")
     public Optional<Empleado> obtenerEmpleadoCedula(@PathVariable Integer cedula){
         return this.empleadoService.obtenerEmpleadoCedula(cedula);
     }

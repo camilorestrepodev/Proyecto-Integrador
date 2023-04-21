@@ -21,7 +21,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET).hasAuthority("READ")
                 .antMatchers(HttpMethod.POST).hasAuthority("WRITE")
-                .antMatchers(HttpMethod.PATCH).hasAuthority("WRITE")
+                .antMatchers(HttpMethod.PUT).hasAuthority("WRITE")
                 .antMatchers(HttpMethod.DELETE).hasAuthority("WRITE")
                 .and()
                 .csrf().disable()
@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                         .build(),
                 User.withUsername("admin")
                         .password(passwordEncoder().encode("admin123"))
-                        .authorities("read","WRITE")
+                        .authorities("READ","WRITE")
                         .build()
         );
     }
