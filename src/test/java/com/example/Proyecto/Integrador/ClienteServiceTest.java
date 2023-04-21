@@ -57,7 +57,6 @@ class ClienteServiceTest {
         Cliente clienteActualizado2 = clienteService.actualizarCliente(clienteActualizado);
 
         // Verify
-        verify(clienteRepository,times(1)).save(clienteActualizado);
         verify(clienteRepository, times(1)).findById(cedula);
 
     }

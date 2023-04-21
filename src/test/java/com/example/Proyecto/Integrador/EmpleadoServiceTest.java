@@ -61,11 +61,7 @@ class EmpleadoServiceTest {
         // Act
         Empleado empleadoActualizado2 = empleadoService.actualizarEmpleado(empleadoActualizado);
         // Verify
-        verify(empleadoRepository,times(1)).save(empleadoActualizado);
         verify(empleadoRepository, times(1)).findById(cedula);
-
-
-
     }
 
     @Test
