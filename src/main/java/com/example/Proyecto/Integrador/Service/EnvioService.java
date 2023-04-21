@@ -2,6 +2,7 @@ package com.example.Proyecto.Integrador.Service;
 
 import com.example.Proyecto.Integrador.Dto.EnvioDto;
 import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
+import com.example.Proyecto.Integrador.Dto.EnvioDtoUpdate;
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import com.example.Proyecto.Integrador.Model.Cliente;
 import com.example.Proyecto.Integrador.Model.Empleado;
@@ -86,7 +87,6 @@ public class EnvioService {
         if (!envio.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
         }
-        Integer numeroGuia = envio.get().getNumGuia();
         Integer cedula = envio.get().getCliente().getCedula();
         String nombre = envio.get().getCliente().getNombre();
         String ciudadOrigen = envio.get().getCiudadOrigen();
@@ -112,40 +112,39 @@ public class EnvioService {
     }
 
 
-    public EnvioDto actualizarEstadoPaquete(EnvioDto envioDto) {
-        Integer cedula = envioDto.getCedula();
+    public EnvioDtoRequest actualizarEstadoPaquete(EnvioDtoUpdate envioDtoUpdate) {
+        Integer cedula = envioDtoUpdate.getCedula();
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
         if (!empleado.isPresent()) {
             throw new ApiRequestException("El empleado con cedula " + cedula + " no existe en nuestra compania");
         }
-        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
-        String tipoEmpleado = empleado.get().getTipoEmpleado();
-        Integer numGuia = envioDtoRequest.getNumGuia();
+        Integer numGuia = envioDtoUpdate.getNumGuia();
         Optional<Envio> envioOptional = this.envioRepository.findById(numGuia);
         if (!envioOptional.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
         }
-        String estadoEnvio = envioDto.getEstadoEnvio();
+        String tipoEmpleado = empleado.get().getTipoEmpleado();
+        String estadoEnvio = envioDtoUpdate.getEstadoEnvio();
+        String estadoEnvioActual = envioOptional.get().getEstadoEnvio();
         if (tipoEmpleado.equals("REPARTIDOR") || tipoEmpleado.equals("COORDINADOR")) {
-            if (envioOptional.get().getEstadoEnvio().equals("RECIBIDO") && estadoEnvio.equals("EN RUTA")) {
+            if (estadoEnvioActual.equals("RECIBIDO") && estadoEnvio.equals("EN RUTA")) {
                 envioOptional.get().setEstadoEnvio(estadoEnvio);
                 this.envioRepository.save(envioOptional.get());
-            } else if (envioOptional.get().getEstadoEnvio().equals("EN RUTA") && estadoEnvio.equals("ENTREGADO")) {
+            } else if (estadoEnvioActual.equals("EN RUTA") && estadoEnvio.equals("ENTREGADO")) {
                 envioOptional.get().setEstadoEnvio(estadoEnvio);
                 this.envioRepository.save(envioOptional.get());
-            } else if (envioOptional.get().getEstadoEnvio().equals("RECIBIDO") && estadoEnvio.equals("ENTREGADO")) {
+            } else if (estadoEnvioActual.equals("RECIBIDO") && estadoEnvio.equals("ENTREGADO")) {
                 throw new ApiRequestException("el cambio de estado no cumple con las validaciones");
             } else {
-                throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
+                throw new ApiRequestException("El tipo de estado no existe en la base de datos" + estadoEnvio);
             }
         } else {
             throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
         }
-        EnvioDto envioDto1 = new EnvioDto();
-        EnvioDtoRequest envioDtoRequest1 = new EnvioDtoRequest();
-        envioDtoRequest1.setNumGuia(envioOptional.get().getNumGuia());
-        envioDto1.setEstadoEnvio(envioOptional.get().getEstadoEnvio());
-        return envioDto1;
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
+        envioDtoRequest.setNumGuia(envioOptional.get().getNumGuia());
+        envioDtoRequest.setEstadoEnvio(envioOptional.get().getEstadoEnvio());
+        return envioDtoRequest;
     }
 
 

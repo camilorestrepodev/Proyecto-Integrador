@@ -2,6 +2,7 @@ package com.example.Proyecto.Integrador.Controller;
 
 import com.example.Proyecto.Integrador.Dto.EnvioDto;
 import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
+import com.example.Proyecto.Integrador.Dto.EnvioDtoUpdate;
 import com.example.Proyecto.Integrador.Model.Envio;
 import com.example.Proyecto.Integrador.Service.EnvioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class EnvioController {
 
     @PutMapping("/envio")
     @PreAuthorize("hasRole('WRITE')")
-    public EnvioDto actualizarEstadoPaquete(@RequestBody EnvioDto envio){
-        return this.envioService.actualizarEstadoPaquete(envio);
+    public EnvioDtoRequest actualizarEstadoPaquete(@RequestBody EnvioDtoUpdate envioDtoUpdate){
+        return this.envioService.actualizarEstadoPaquete(envioDtoUpdate);
     }
 
     @GetMapping("/envio")
