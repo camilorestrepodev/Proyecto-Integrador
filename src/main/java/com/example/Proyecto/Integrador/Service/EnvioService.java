@@ -1,6 +1,7 @@
 package com.example.Proyecto.Integrador.Service;
 
 import com.example.Proyecto.Integrador.Dto.EnvioDto;
+import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import com.example.Proyecto.Integrador.Model.Cliente;
 import com.example.Proyecto.Integrador.Model.Empleado;
@@ -34,7 +35,7 @@ public class EnvioService {
         this.empleadoRepository = empleadoRepository;
     }
 
-    public EnvioDto crearEnvio(EnvioDto envioDto) {
+    public EnvioDtoRequest crearEnvio(EnvioDto envioDto) {
         if (envioDto.getCedula() == null ||
                 envioDto.getNombreRemitente() == null ||
                 envioDto.getCiudadOrigen() == null ||
@@ -66,8 +67,9 @@ public class EnvioService {
                     paquete
             );
             Envio envio1 = this.envioRepository.save(envio);
-            envioDto.setNumGuia(envio1.getNumGuia());
-            return envioDto;
+            envio1.setNumGuia(envio1.getNumGuia());
+            EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest(envio1.getNumGuia(),envio1.getEstadoEnvio());
+            return envioDtoRequest;
         } else {
             throw new ApiRequestException("El cliente con cedula " + envioDto.getCedula() + " debe de estar registrado para poder enviar el paquete.");
         }
@@ -95,12 +97,9 @@ public class EnvioService {
         Integer valorDeclarado = envio.get().getPaquete().getValorDeclarado();
         Double peso = envio.get().getPaquete().getPeso();
         Integer valorEnvio = envio.get().getValorEnvio();
-        EnvioDto envioDto = new EnvioDto(
-                cedula, nombre, ciudadOrigen,
-                ciudadDestino, direccionDestino, nombrePersona,
-                celular, peso, valorDeclarado);
-        envioDto.setNumGuia(numeroGuia);
         String estadoEnvio = envio.get().getEstadoEnvio();
+        EnvioDto envioDto = new EnvioDto(
+                cedula, nombre,ciudadOrigen,ciudadDestino,direccionDestino,nombrePersona,celular,peso,estadoEnvio,valorDeclarado);
         if (estadoEnvio.equals("RECIBIDO")) {
             envio.get().setEstadoEnvio("EN RUTA");
             envioDto.setEstadoEnvio("EN RUTA");
@@ -119,8 +118,9 @@ public class EnvioService {
         if (!empleado.isPresent()) {
             throw new ApiRequestException("El empleado con cedula " + cedula + " no existe en nuestra compania");
         }
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         String tipoEmpleado = empleado.get().getTipoEmpleado();
-        Integer numGuia = envioDto.getNumGuia();
+        Integer numGuia = envioDtoRequest.getNumGuia();
         Optional<Envio> envioOptional = this.envioRepository.findById(numGuia);
         if (!envioOptional.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
@@ -142,7 +142,8 @@ public class EnvioService {
             throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
         }
         EnvioDto envioDto1 = new EnvioDto();
-        envioDto1.setNumGuia(envioOptional.get().getNumGuia());
+        EnvioDtoRequest envioDtoRequest1 = new EnvioDtoRequest();
+        envioDtoRequest1.setNumGuia(envioOptional.get().getNumGuia());
         envioDto1.setEstadoEnvio(envioOptional.get().getEstadoEnvio());
         return envioDto1;
     }

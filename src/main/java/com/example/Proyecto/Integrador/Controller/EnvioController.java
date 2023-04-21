@@ -1,6 +1,7 @@
 package com.example.Proyecto.Integrador.Controller;
 
 import com.example.Proyecto.Integrador.Dto.EnvioDto;
+import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
 import com.example.Proyecto.Integrador.Model.Envio;
 import com.example.Proyecto.Integrador.Service.EnvioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class EnvioController {
 
     @PostMapping("/envio")
     @PreAuthorize("hasRole('WRITE')")
-    public EnvioDto crearEnvio(@RequestBody EnvioDto envio){
+    public EnvioDtoRequest crearEnvio(@RequestBody EnvioDto envio){
         return this.envioService.crearEnvio(envio);
     }
 

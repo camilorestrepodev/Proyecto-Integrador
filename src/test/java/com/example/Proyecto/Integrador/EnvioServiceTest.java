@@ -1,6 +1,7 @@
 package com.example.Proyecto.Integrador;
 
 import com.example.Proyecto.Integrador.Dto.EnvioDto;
+import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
 import com.example.Proyecto.Integrador.Model.Cliente;
 import com.example.Proyecto.Integrador.Model.Empleado;
@@ -69,7 +70,7 @@ class EnvioServiceTest {
         when(envioRepository.save(any(Envio.class))).thenReturn(envio);
 
         // Act
-        EnvioDto result = envioService.crearEnvio(envioDto);
+        EnvioDtoRequest result = envioService.crearEnvio(envioDto);
 
         // Assert
         Assertions.assertNotNull(result);
@@ -78,7 +79,7 @@ class EnvioServiceTest {
 
     @Test
     void crearEnvioConDatosNull() {
-        EnvioDto envioDto = new EnvioDto(null, null, null, null, null, null, null, null, null);
+        EnvioDto envioDto = new EnvioDto(null, null, null, null, null, null, null, null, null,null);
         when(envioRepository.findById(envioDto.getCedula())).thenReturn(Optional.empty());
         ApiRequestException thrown = assertThrows(
                 ApiRequestException.class,
@@ -146,11 +147,11 @@ class EnvioServiceTest {
         when(envioRepository.findById(numGuia)).thenReturn(Optional.of(envio));
 
         // Act
-        EnvioDto envioDto = envioService.obtenerNumeroGuia(numGuia);
+        EnvioDto envioDto = envioService.obtenerNumeroGuia(envio.getNumGuia());
 
         // Assert
         Assertions.assertNotNull(envioDto);
-        Assertions.assertEquals(numGuia, envioDto.getNumGuia());
+        Assertions.assertEquals(numGuia, envio.getNumGuia());
         Assertions.assertEquals(cliente.getCedula(), envioDto.getCedula());
         Assertions.assertEquals(cliente.getNombre(), envioDto.getNombreRemitente());
         Assertions.assertEquals(envio.getCiudadOrigen(), envioDto.getCiudadOrigen());
@@ -178,10 +179,11 @@ class EnvioServiceTest {
         paquete.setIdPaquete(12);
         Envio envio = new Envio(cliente, "Bogotá", "Medellín",
                 "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envio.setNumGuia(1234);
         EnvioDto envioDto = new EnvioDto();
         envioDto.setCedula(empleado.getCedula());
-        envioDto.setNumGuia(envio.getNumGuia());
+        envioDtoRequest.setNumGuia(envio.getNumGuia());
         envioDto.setEstadoEnvio("EN RUTA");
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
@@ -211,8 +213,9 @@ class EnvioServiceTest {
                 "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
         envio.setNumGuia(1234);
         EnvioDto envioDto = new EnvioDto();
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDto.setCedula(12345678);
-        envioDto.setNumGuia(envio.getNumGuia());
+        envioDtoRequest.setNumGuia(envio.getNumGuia());
         envioDto.setEstadoEnvio("ENTREGADO");
 
         when(empleadoRepository.findById(123)).thenReturn(Optional.of(empleado));
@@ -240,8 +243,9 @@ class EnvioServiceTest {
                 "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
         envio.setNumGuia(12345);
         EnvioDto envioDto = new EnvioDto();
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDto.setCedula(empleado.getCedula());
-        envioDto.setNumGuia(123456);
+        envioDtoRequest.setNumGuia(123456);
         envioDto.setEstadoEnvio("ENTREGADO");
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
@@ -269,8 +273,9 @@ class EnvioServiceTest {
                 "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
         envio.setNumGuia(1234);
         EnvioDto envioDto = new EnvioDto();
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDto.setCedula(empleado.getCedula());
-        envioDto.setNumGuia(envio.getNumGuia());
+        envioDtoRequest.setNumGuia(envio.getNumGuia());
         envioDto.setEstadoEnvio("ENTREGADO");
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
@@ -299,8 +304,9 @@ class EnvioServiceTest {
                 "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
         envio.setNumGuia(1234);
         EnvioDto envioDto = new EnvioDto();
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDto.setCedula(empleado.getCedula());
-        envioDto.setNumGuia(envio.getNumGuia());
+        envioDtoRequest.setNumGuia(envio.getNumGuia());
         envioDto.setEstadoEnvio("ENTREGADO");
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
