@@ -23,7 +23,7 @@ server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 ```
 ## Documentación <img align="center" alt="Pruebas" height="40" width="40" src="https://avatars.githubusercontent.com/u/7658037?s=280&v=4">
-La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://sistemadereservas-production-26ff.up.railway.app/swagger-ui/index.html).
+La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://proyecto-integrador-production-f4fb.up.railway.app/swagger-ui/index.html).
 
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
@@ -56,6 +56,8 @@ com.example.Proyecto-Integrador
 │   ├── ClienteDto.java
 │   ├── EmpleadoDto.java
 │   ├── EnvioDto.java
+│   ├── EnvioDtoRequest.java
+│   ├── EnvioDtoUpdate.java
 │   └── PaqueteDto.java
 ├── Exception
 │   ├── ApiExceptionHandler.java
@@ -71,7 +73,7 @@ com.example.Proyecto-Integrador
 │   ├── HabitacionRepository.java
 │   ├── ReservaRepository.java
 │   └── PaqueteRepository.java
-├── Service
+├── Segurity
 │   └── WebSecurityConfig.java
 ├── Service
 │   ├── ClienteService.java
@@ -87,8 +89,8 @@ El proyecto está organizado en cuatro paquetes principales, cada uno correspond
 - El paquete **Controller** contiene las clases controladoras para los microservicios de Cliente, Habitación y Envio.
 - El paquete **Dto** contiene las clases DTO (Data Transfer Object) para los objetos Cliente, Habitación y Reserva, que se utilizan para transferir datos entre la capa de presentación y la capa de servicios.
 - El paquete **Exception** contiene las clases de Excepciones (ApiExceptionHandler, ApiRequestException) para el manejo de errores.
-- El paquete **Model** contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Habitación y Reserva, que se utilizan para mapear las tablas de la base de datos.
-- El paquete **Repository** contiene las interfaces de repositorios JPA para los objetos Cliente, Habitación y Reserva, que se utilizan para interactuar con la base de datos.
+- El paquete **Model** contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Empleado y Envio, que se utilizan para mapear las tablas de la base de datos.
+- El paquete **Repository** contiene las interfaces de repositorios JPA para los objetos Cliente, Empleado y Envio, que se utilizan para interactuar con la base de datos.
 - El paquete **Security** contiene la clase de seguridad que se utiliza para autenticación y autorización de seguridad
 - El paquete **Service** contiene las clases de servicios para los microservicios de Cliente, Empleado y Envio, que contienen la lógica de negocio.
 La clase HotelAshirApplication es la clase principal del proyecto que se utiliza para iniciar la aplicación.
@@ -193,7 +195,7 @@ Ejemplo de petición:
 |`POST`         | ``(http://localhost:8080/api/v1/envio)``|Crea un nuevo envio|
 |`PUT`          | ``(http://localhost:8080/api/v1/envio)``|Actualizar datos del envio|
 |`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener envio por número de guia|
-|`GET`          | ``(http://localhost:8080/api/v1/envio)``  |Obtener envios por estado|
+|`GET`          | ``(http://localhost:8080/api/v1/envio](http://localhost:8080/api/v1/envio/?cedula=12345&estadoEnvio=RECIBIDO)``  |Obtener envios por estado|
 
 Endpoints:
 - **POST /envio** - Crea un nuevo envio
