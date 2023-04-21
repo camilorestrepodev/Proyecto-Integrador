@@ -36,9 +36,10 @@ Este es el diagrama del modelo entidad-relación para la base de datos MySQL del
 ![diagrama](https://user-images.githubusercontent.com/115324147/233475114-f72509af-a274-4fa1-9bab-b0669dbea10e.png)
 
 
-- La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, direccion, edad y correo electronico.
-- La tabla **Habitación** contiene información sobre las habitaciones, como el numero, precio y tipo.
-- La tabla **Reserva** contiene información sobre las reservas, como el codigo de reserva, la cedula del cliente que la realizó, el numero de la habitación reservada y la fecha de la reserva y el total a pagar.
+- La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, celular, ciudad, correo electronico y dirección
+- La tabla **Empleado** contiene información sobre los empleados, como su cedula, nombre, apellido, celular, ciudad, correo electronico, dirección, antiguedad, tipo de sangre y tipo de empleado.
+- La tabla **Envio** contiene información sobre los envios, como el numero de guia, ciudad de destino, ciudad origen, dirección destino, estado del envio, hora de entrega, nombre de la persona, numero de la persona, valor del envio.
+- La tabla **Paquete** contiene información sobre los paquetes, como el id del paquete, peso, tipo de paquete y valor declarado.
 
 ## Diagrama del proyecto por paquetes
 
@@ -56,16 +57,22 @@ com.example.Proyecto-Integrador
 │   ├── EmpleadoDto.java
 │   ├── EnvioDto.java
 │   └── PaqueteDto.java
-├── Entity
+├── Exception
+│   ├── ApiExceptionHandler.java
+│   └── ApiRequestException.java
+├── Model
 │   ├── Cliente.java
 │   ├── Empleado.java
 │   ├── Envio.java
-│   └── Paquete.java
+│   ├── Paquete.java
+│   └── Persona.java
 ├── Repository
 │   ├── ClienteRepository.java
 │   ├── HabitacionRepository.java
 │   ├── ReservaRepository.java
 │   └── PaqueteRepository.java
+├── Service
+│   └── WebSecurityConfig.java
 ├── Service
 │   ├── ClienteService.java
 │   ├── HabitacionService.java
@@ -76,12 +83,14 @@ com.example.Proyecto-Integrador
 
 El proyecto está organizado en cuatro paquetes principales, cada uno correspondiente a un microservicio:
 
-- El paquete Configurer contiene las clases de configuración para la base de datos y Swagger.
-- El paquete Controller contiene las clases controladoras para los microservicios de Cliente, Habitación y Reserva.
-- El paquete Dto contiene las clases DTO (Data Transfer Object) para los objetos Cliente, Habitación y Reserva, que se utilizan para transferir datos entre la capa de presentación y la capa de servicios.
-- El paquete Entity contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Habitación y Reserva, que se utilizan para mapear las tablas de la base de datos.
-- El paquete Repository contiene las interfaces de repositorios JPA para los objetos Cliente, Habitación y Reserva, que se utilizan para interactuar con la base de datos.
-- El paquete Service contiene las clases de servicios para los microservicios de Cliente, Habitación y Reserva, que contienen la lógica de negocio.
+- El paquete **Configurer** contiene las clases de configuración para la base de datos y Swagger.
+- El paquete **Controller** contiene las clases controladoras para los microservicios de Cliente, Habitación y Reserva.
+- El paquete **Dto** contiene las clases DTO (Data Transfer Object) para los objetos Cliente, Habitación y Reserva, que se utilizan para transferir datos entre la capa de presentación y la capa de servicios.
+- El paquete **Exception** contiene las clases de Excepciones (ApiExceptionHandler, ApiRequestException) para el manejo de errores.
+- El paquete **Model** contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Habitación y Reserva, que se utilizan para mapear las tablas de la base de datos.
+- El paquete **Repository** contiene las interfaces de repositorios JPA para los objetos Cliente, Habitación y Reserva, que se utilizan para interactuar con la base de datos.
+- El paquete **Security** contiene la clase de seguridad que se utiliza para autenticación y autorización de seguridad
+- El paquete **Service** contiene las clases de servicios para los microservicios de Cliente, Habitación y Reserva, que contienen la lógica de negocio.
 La clase HotelAshirApplication es la clase principal del proyecto que se utiliza para iniciar la aplicación.
 
 Además, hay un paquete adicional llamado common que contiene clases y utilidades compartidas por los microservicios.
