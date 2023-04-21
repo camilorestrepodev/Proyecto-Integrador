@@ -22,20 +22,19 @@ spring.jpa.hibernate.ddl-auto=update
 server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 ```
-## Documentación
+## Documentación <img align="center" alt="Pruebas" height="40" width="40" src="https://avatars.githubusercontent.com/u/7658037?s=280&v=4">
 La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://sistemadereservas-production-26ff.up.railway.app/swagger-ui/index.html).
 
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
 
-## Autenticación y autorización seguridad
+## Autenticación y autorización seguridad <img align="center" alt="Pruebas" height="60" width="60" src="https://pbs.twimg.com/profile_images/1235983944463585281/AWCKLiJh_400x400.png">
 Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de Envio.
 Cada usuario tiene su rol como `WRITE` o `READ`
 
-## Diagrama del Modelo Entidad-Relación
+## Diagrama del Modelo Entidad-Relación <img align="center" alt="Pruebas" height="40" width="40" src="https://user-images.githubusercontent.com/115324147/233542530-c691174d-7f63-4ea9-8126-c3ecf520b2c2.png">
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
 ![diagrama](https://user-images.githubusercontent.com/115324147/233475114-f72509af-a274-4fa1-9bab-b0669dbea10e.png)
-
 
 - La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, celular, ciudad, correo electronico y dirección
 - La tabla **Empleado** contiene información sobre los empleados, como su cedula, nombre, apellido, celular, ciudad, correo electronico, dirección, antiguedad, tipo de sangre y tipo de empleado.
@@ -96,7 +95,8 @@ La clase HotelAshirApplication es la clase principal del proyecto que se utiliza
 
 Además, hay un paquete adicional llamado common que contiene clases y utilidades compartidas por los microservicios.
 
-## Microservicios
+## Microservicios <img align="center" alt="microservicio" height="40" width="40" src="https://user-images.githubusercontent.com/115324147/233541782-7b18ad4a-54d2-4304-945c-db24491a886e.png">
+
 Este proyecto está dividido en tres microservicios diferentes: Cliente, Habitación y Reserva. Cada microservicio tiene su propia base de datos y API REST. La comunicación entre los microservicios se realiza a través de peticiones HTTP.
 
 #### Cliente Microservicio
@@ -225,12 +225,16 @@ Ejemplo de petición:
 "cedula": 12345
 }
 ```
+## Postman <img align="center" alt="Pruebas" height="40" width="40" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png">
+Para probar los endpoints de la aplicación, se recomienda el uso de la herramienta Postman. Esta herramienta permite hacer peticiones HTTP a la API y recibir las respuestas en tiempo real. 
+
+![postman](https://user-images.githubusercontent.com/115324147/233542888-3c3ecc17-9b61-4d65-a786-6b85f3ae77b5.png)
 
 ## Pruebas Unitarias <img align="center" alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
 Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
 Las pruebas unitarias se encuentran en la carpeta src/test/java del proyecto.
 
-## Integración continua con GitHub
+## Integración continua con GitHub Actions <img align="center" alt="Integracion" height="50" width="50" src="https://media.giphy.com/media/Vnk8f29XU6GSZK8uGJ/giphy.gif">
 Este proyecto cuenta con integración continua mediante Github Actions. Cada vez que se realiza un push al repositorio, se ejecutan las pruebas unitarias y se crea un archivo JAR ejecutable.
 
 ## Despliegue del microservicio (Railway) <img align="center" alt="Depliegue" height="40" width="40" src="https://media.giphy.com/media/tzv65Sc3tBQWNMSI3B/giphy.gif">
