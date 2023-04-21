@@ -29,7 +29,8 @@ La documentación de la API se genera automáticamente con Swagger. Para acceder
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
 
 ## Autenticación y autorización seguridad
-Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de reserva.
+Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de Envio.
+Cada usuario tiene su rol como `WRITE` o `READ`
 
 ## Diagrama del Modelo Entidad-Relación
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
@@ -84,13 +85,13 @@ com.example.Proyecto-Integrador
 El proyecto está organizado en cuatro paquetes principales, cada uno correspondiente a un microservicio:
 
 - El paquete **Configurer** contiene las clases de configuración para la base de datos y Swagger.
-- El paquete **Controller** contiene las clases controladoras para los microservicios de Cliente, Habitación y Reserva.
+- El paquete **Controller** contiene las clases controladoras para los microservicios de Cliente, Habitación y Envio.
 - El paquete **Dto** contiene las clases DTO (Data Transfer Object) para los objetos Cliente, Habitación y Reserva, que se utilizan para transferir datos entre la capa de presentación y la capa de servicios.
 - El paquete **Exception** contiene las clases de Excepciones (ApiExceptionHandler, ApiRequestException) para el manejo de errores.
 - El paquete **Model** contiene las clases de entidades JPA (Java Persistence API) para los objetos Cliente, Habitación y Reserva, que se utilizan para mapear las tablas de la base de datos.
 - El paquete **Repository** contiene las interfaces de repositorios JPA para los objetos Cliente, Habitación y Reserva, que se utilizan para interactuar con la base de datos.
 - El paquete **Security** contiene la clase de seguridad que se utiliza para autenticación y autorización de seguridad
-- El paquete **Service** contiene las clases de servicios para los microservicios de Cliente, Habitación y Reserva, que contienen la lógica de negocio.
+- El paquete **Service** contiene las clases de servicios para los microservicios de Cliente, Empleado y Envio, que contienen la lógica de negocio.
 La clase HotelAshirApplication es la clase principal del proyecto que se utiliza para iniciar la aplicación.
 
 Además, hay un paquete adicional llamado common que contiene clases y utilidades compartidas por los microservicios.
@@ -123,8 +124,8 @@ Endpoints:
 #### Empleado Microservicio
 | Método Http   | EndPoint      |Descripción   |  Cuerpo |
 | ------------- | ------------- |------------- |---------|
-|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo empleado|DD     |
-|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del empleado|         |
+|`POST`         | ``(http://localhost:8080/api/v1/empleado)``|Crea un nuevo empleado|DD     |
+|`PUT`          | ``(http://localhost:8080/api/v1/empleado)``|Actualizar datos del empleado|         |
 |`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
 |`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener empleado por cédula|         |
 
@@ -139,12 +140,12 @@ Endpoints:
 ```
 
 #### Envio Microservicio
-| Método Http   | EndPoint      |Descripción   |  Cuerpo |
-| ------------- | ------------- |------------- |---------|
-|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo cliente|DD     |
-|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del cliente|         |
-|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
-|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener cliente por cédula|         |
+| Método Http   | EndPoint      |Descripción   |
+| ------------- | ------------- |------------- |
+|`POST`         | ``(http://localhost:8080/api/v1/envio)``|Crea un nuevo envio|
+|`PUT`          | ``(http://localhost:8080/api/v1/envio)``|Actualizar datos del envio|
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener envio por número de guia|
+|`GET`          | ``(http://localhost:8080/api/v1/envio)``  |Obtener envios por estado|
 
 Endpoints:
 - **POST /reservar** - Crea una nueva habitación
