@@ -2,6 +2,9 @@
 
 Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Cliente, Empleado, Envío y Paquete. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
 
+<div align="center" > <img alt="logo" height="100" width="400" align="center" src="https://user-images.githubusercontent.com/115324147/233528141-8f02ce04-0c5a-49c6-9c07-072e909bec20.png">
+</div>
+
 ## Tecnologías utilizadas
 - Java versión: 11
 - Spring Framework
