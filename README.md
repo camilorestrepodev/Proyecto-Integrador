@@ -195,7 +195,7 @@ Ejemplo de petición:
 |`POST`         | ``(http://localhost:8080/api/v1/envio)``|Crea un nuevo envio|
 |`PUT`          | ``(http://localhost:8080/api/v1/envio)``|Actualizar datos del envio|
 |`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener envio por número de guia|
-|`GET`          | ``(http://localhost:8080/api/v1/envio)``  |Obtener envios por estado|
+|`GET`          | ``(http://localhost:8080/api/v1/envio](http://localhost:8080/api/v1/envio/?cedula=12345&estadoEnvio=RECIBIDO)``  |Obtener envios por estado|
 
 Endpoints:
 - **POST /envio** - Crea un nuevo envio
