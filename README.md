@@ -99,21 +99,35 @@ Además, hay un paquete adicional llamado common que contiene clases y utilidade
 Este proyecto está dividido en tres microservicios diferentes: Cliente, Habitación y Reserva. Cada microservicio tiene su propia base de datos y API REST. La comunicación entre los microservicios se realiza a través de peticiones HTTP.
 
 #### Cliente Microservicio
+| Método Http   | EndPoint      |Descripción   |  Cuerpo |
+| ------------- | ------------- |------------- |---------|
+|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo cliente|DD     |
+|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del cliente|         |
+|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener cliente por cédula|         |
+
 Endpoints:
 - **POST /clientes** - Crea un nuevo cliente
 ```java
 {
-"cedula": 12345,
+"cedula": 123456,
 "nombre":"Mateo",
 "apellido":"Zapata",
+"celular": 30463,
 "correoElectronico" : "mateo@gmail.com",
 "direccion" :"calle 46 # 69-90",
-"edad" : 18,
-"correo" : "mateo@gmail.com"
+"ciudad" : "Medellin"
 }
 ```
 
-#### Habitación Microservicio
+#### Empleado Microservicio
+| Método Http   | EndPoint      |Descripción   |  Cuerpo |
+| ------------- | ------------- |------------- |---------|
+|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo empleado|DD     |
+|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del empleado|         |
+|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener empleado por cédula|         |
+
 Endpoints:
 - **POST /habitaciones** - Crea una nueva habitación
 ```java
@@ -124,7 +138,14 @@ Endpoints:
 }
 ```
 
-#### Reserva Microservicio
+#### Envio Microservicio
+| Método Http   | EndPoint      |Descripción   |  Cuerpo |
+| ------------- | ------------- |------------- |---------|
+|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo cliente|DD     |
+|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del cliente|         |
+|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener cliente por cédula|         |
+
 Endpoints:
 - **POST /reservar** - Crea una nueva habitación
   Ejemplo de petición:
