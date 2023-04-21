@@ -3,9 +3,10 @@
 Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Cliente, Empleado, Envío y Paquete. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
 
 ## Tecnologías utilizadas
-- Java: versión 11
+- Java versión: 11
 - Spring Framework
 - Gestor de dependencias: Gradle
+- Lombok
 - Bases de datos: MySQL
 
 ## Configuración 
@@ -13,7 +14,7 @@ Antes de comenzar, asegúrese de tener una base de datos configurada y actualice
 ```java
 spring.datasource.url=jdbc:mysql://localhost:3306/proyectointegrador
 spring.datasource.username=root
-spring.datasource.password=******
+spring.datasource.password={password}
 spring.jpa.hibernate.ddl-auto=update
 server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
@@ -24,10 +25,12 @@ La documentación de la API se genera automáticamente con Swagger. Para acceder
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
 
+## Autenticación y autorización seguridad
+Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de reserva.
+
 ## Diagrama del Modelo Entidad-Relación
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
 ![diagrama](https://user-images.githubusercontent.com/115324147/233475114-f72509af-a274-4fa1-9bab-b0669dbea10e.png)
-
 
 
 - La tabla **Cliente** contiene información sobre los clientes, como su cedula, nombre, apellido, direccion, edad y correo electronico.
@@ -181,12 +184,12 @@ Ejemplo de petición:
     }
 ]
 ```
-## Pruebas Unitarias <img alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
+## Pruebas Unitarias <img align="center" alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
 Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
 Las pruebas unitarias se encuentran en la carpeta src/test/java del proyecto.
 
 ## Integración continua con GitHub
 Este proyecto cuenta con integración continua mediante Github Actions. Cada vez que se realiza un push al repositorio, se ejecutan las pruebas unitarias y se crea un archivo JAR ejecutable.
 
-## Despliegue del microservicio (Railway)
+## Despliegue del microservicio (Railway) <img align="center" alt="Depliegue" height="40" width="40" src="https://media.giphy.com/media/tzv65Sc3tBQWNMSI3B/giphy.gif">
 Este proyecto cuenta con un despliegue del microservicio mediante Railway. Conecta directamente con Github y nuestra base de datos(MySQL).
