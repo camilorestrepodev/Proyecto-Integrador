@@ -35,10 +35,15 @@ public class EnvioService {
     }
 
     public EnvioDto crearEnvio(EnvioDto envioDto) {
-        if (envioDto.getCedula() == null || envioDto.getNombreRemitente() == null || envioDto.getCiudadOrigen() == null ||
-                envioDto.getCiudadDestino() == null || envioDto.getDireccionDestino() == null ||
-                envioDto.getNombrePersona() == null || envioDto.getNumeroPersona() == null ||
-                envioDto.getPeso() == null || envioDto.getValorDeclarado() == null) {
+        if (envioDto.getCedula() == null ||
+                envioDto.getNombreRemitente() == null ||
+                envioDto.getCiudadOrigen() == null ||
+                envioDto.getCiudadDestino() == null ||
+                envioDto.getDireccionDestino() == null ||
+                envioDto.getNombrePersona() == null ||
+                envioDto.getNumeroPersona() == null ||
+                envioDto.getPeso() == null ||
+                envioDto.getValorDeclarado() == null) {
             throw new ApiRequestException("Algunos de los campos ingresados estan vacios");
         }
         Optional<Cliente> clienteOptional = this.clienteRepository.findById(envioDto.getCedula());
@@ -48,9 +53,17 @@ public class EnvioService {
             paquete.setPeso(envioDto.getPeso());
             paquete.setValorDeclarado(envioDto.getValorDeclarado());
             this.paqueteRepository.save(paquete);
-            Envio envio = new Envio(clienteOptional.get(), envioDto.getCiudadOrigen(), envioDto.getCiudadDestino(),
-                    envioDto.getDireccionDestino(), envioDto.getNombrePersona(), envioDto.getNumeroPersona(),
-                    asignarHora(), "RECIBIDO",Envio.asignarPrecioEnvio(paquete.getTipoPaquete()), paquete
+            Envio envio = new Envio(
+                    clienteOptional.get(),
+                    envioDto.getCiudadOrigen(),
+                    envioDto.getCiudadDestino(),
+                    envioDto.getDireccionDestino(),
+                    envioDto.getNombrePersona(),
+                    envioDto.getNumeroPersona(),
+                    asignarHora(),
+                    "RECIBIDO",
+                    Envio.asignarPrecioEnvio(paquete.getTipoPaquete()),
+                    paquete
             );
             Envio envio1 = this.envioRepository.save(envio);
             envioDto.setNumGuia(envio1.getNumGuia());
@@ -60,14 +73,11 @@ public class EnvioService {
         }
     }
 
-
-
     public String asignarHora() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
-
 
     public EnvioDto obtenerNumeroGuia(Integer numGuia) {
         Optional<Envio> envio = this.envioRepository.findById(numGuia);

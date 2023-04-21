@@ -26,20 +26,17 @@ public class EnvioController {
         return this.envioService.crearEnvio(envio);
     }
 
-
     @GetMapping("/envio/{numGuia}")
     @PreAuthorize("hasRole('READ')")
     public EnvioDto obtenerNumeroGuia(@PathVariable Integer numGuia){
         return this.envioService.obtenerNumeroGuia(numGuia);
     }
 
-
     @PutMapping("/envio")
     @PreAuthorize("hasRole('WRITE')")
     public EnvioDto actualizarEstadoPaquete(@RequestBody EnvioDto envio){
         return this.envioService.actualizarEstadoPaquete(envio);
     }
-
 
     @GetMapping("/envio")
     @PreAuthorize("hasRole('READ')")

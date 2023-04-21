@@ -17,7 +17,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .httpBasic()
-                .and().authorizeHttpRequests()
+                .and()
+                .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET).hasAuthority("READ")
                 .antMatchers(HttpMethod.POST).hasAuthority("WRITE")
                 .antMatchers(HttpMethod.PATCH).hasAuthority("WRITE")
