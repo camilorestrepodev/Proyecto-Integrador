@@ -100,15 +100,18 @@ Además, hay un paquete adicional llamado common que contiene clases y utilidade
 Este proyecto está dividido en tres microservicios diferentes: Cliente, Habitación y Reserva. Cada microservicio tiene su propia base de datos y API REST. La comunicación entre los microservicios se realiza a través de peticiones HTTP.
 
 #### Cliente Microservicio
-| Método Http   | EndPoint      |Descripción   |  Cuerpo |
-| ------------- | ------------- |------------- |---------|
-|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo cliente|DD     |
-|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del cliente|         |
-|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
-|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener cliente por cédula|         |
+| Método Http   | EndPoint      |Descripción   |
+| ------------- | ------------- |------------- |
+|`POST`         | ``(http://localhost:8080/api/v1/cliente)``|Crea un nuevo cliente|
+|`PUT`          | ``(http://localhost:8080/api/v1/cliente)``|Actualizar datos del cliente|
+|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener cliente por cédula|
 
 Endpoints:
-- **POST /clientes** - Crea un nuevo cliente
+- **POST /cliente** - Crea un nuevo cliente
+
+Ejemplo de petición:
+
 ```java
 {
 "cedula": 123456,
@@ -121,21 +124,66 @@ Endpoints:
 }
 ```
 
-#### Empleado Microservicio
-| Método Http   | EndPoint      |Descripción   |  Cuerpo |
-| ------------- | ------------- |------------- |---------|
-|`POST`         | ``(http://localhost:8080/api/v1/empleado)``|Crea un nuevo empleado|DD     |
-|`PUT`          | ``(http://localhost:8080/api/v1/empleado)``|Actualizar datos del empleado|         |
-|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|         |
-|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener empleado por cédula|         |
+- **PUT /cliente** - Actualizar datos del cliente
 
-Endpoints:
-- **POST /habitaciones** - Crea una nueva habitación
+Ejemplo de petición:
+
 ```java
 {
-    "numero": 1,
-    "tipoHabitacion": "PREMIUM",
-    "precioBase": 25000
+"cedula": 123456,
+"nombre":"Camilo",
+"apellido":"Restrepo",
+"celular": 30463,
+"correoElectronico" : "camilor@gmail.com",
+"direccion" :"calle 55 # 6-90",
+"ciudad" : "Cucuta"
+}
+```
+
+#### Empleado Microservicio
+| Método Http   | EndPoint      |Descripción   |
+| ------------- | ------------- |------------- |
+|`POST`         | ``(http://localhost:8080/api/v1/empleado)``|Crea un nuevo empleado|
+|`PUT`          | ``(http://localhost:8080/api/v1/empleado)``|Actualizar datos del empleado|
+|`DELETE`         | ``(http://localhost:8080/api/v1/cliente/123456)``  |Eliminar cliente por cédula|
+|`GET`       | ``(http://localhost:8080/api/v1/cliente/123456)``  |Obtener empleado por cédula|
+
+
+Endpoints:
+- **POST /empleado** - Crea un nuevo empleado
+
+Ejemplo de petición:
+```java
+{
+    "cedula": 12345,
+    "nombre":"Mateo",
+    "apellido":"Zapata",
+    "celular": 30466,
+    "correoElectronico" : "mateo@gmail.com",
+    "direccion" :"calle 46 # 69-90",
+    "ciudad" : "Medellin",
+    "antiguedad" : 1,
+    "tipoSangre" : "o+",
+    "tipoEmpleado": "REPARTIDOR"
+}
+```
+
+- **PUT /empleado** - Actualizar los datos de un empleado
+
+Ejemplo de petición:
+
+```java
+{
+    "cedula": 12345,
+    "nombre":"camilo",
+    "apellido":"restrepo",
+    "celular": 30466,
+    "correoElectronico" : "camilor@gmail.com",
+    "direccion" :"calle 46 # 69-90",
+    "ciudad" : "Medellin",
+    "antiguedad" : 1,
+    "tipoSangre" : "o+",
+    "tipoEmpleado": "REPARTIDOR"
 }
 ```
 
@@ -148,76 +196,36 @@ Endpoints:
 |`GET`          | ``(http://localhost:8080/api/v1/envio)``  |Obtener envios por estado|
 
 Endpoints:
-- **POST /reservar** - Crea una nueva habitación
-  Ejemplo de petición:
+- **POST /envio** - Crea un nuevo envio
+ 
+Ejemplo de petición:
 
-``(http://localhost:8084/api/v1/reservar/?numero=10&fecha=25-08-2023&cedula=12345)``
-
-Respuesta de petición:
 ```java
 {
-    "fechaReserva": "2023-08-25",
-    "numero": 99,
-    "codigoReserva": 27,
-    "totalPago": 750
+"cedula":123456,
+"nombreRemitente": "Mateo",
+"ciudadOrigen":"Medellin",
+"ciudadDestino":"Bogota",
+"direccionDestino": "calle 46 # 69-90",
+"nombrePersona" : "Juan Manuel",
+"numeroPersona" : 30463,
+"peso": 2.0,
+"valorDeclarado": 15000
 }
 ```
 
-- **GET /reservas/{cedula}** - Obtener lista de reservas por cedula
+- **PUT /envio** - Actualizar estado de envio
 
 Ejemplo de petición:
-
-``(http://localhost:8084/api/v1/reservas/12345)``
 
 ```java
-[
-     {
-        "fechaReserva": "2023-08-25",
-        "habitacion": {
-            "numero": 99,
-            "tipoHabitacion": "PREMIUM",
-            "precioBase": 15000
-        },
-        "cliente": {
-            "nombre": "Mateo",
-            "apellido": "Zapata",
-            "cedula": 123,
-            "direccion": "mateo@gmail.com",
-            "edad": 18,
-            "email": "calle 46 # 69-90"
-        },
-        "codigoReserva": 27,
-        "totalPago": 750
-    }
-]
+{
+"numGuia": 40,
+"estadoEnvio":"ENTREGADO",
+"cedula": 12345
+}
 ```
 
-- **GET /disponibles/{fecha}** - Obtener lista de habitaciones disponibles por fecha
-
-Ejemplo de petición:
-
-``(http://localhost:8084/api/v1/disponibles/25-08-2023)``
-
-- **GET /disponibles/habitacion** - Obtener lista de habitaciones por tipo y fecha
-
-Ejemplo de petición:
-
-``(http://localhost:8084/api/v1/disponibles/habitacion?tipo=premium&fecha=28-03-2023)``
-
-```java
-[
-    {
-        "numero": 11,
-        "tipoHabitacion": "premium",
-        "precioBase": 20500
-    },
-    {
-        "numero": 12,
-        "tipoHabitacion": "premium",
-        "precioBase": 20500
-    }
-]
-```
 ## Pruebas Unitarias <img align="center" alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
 Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
 Las pruebas unitarias se encuentran en la carpeta src/test/java del proyecto.
