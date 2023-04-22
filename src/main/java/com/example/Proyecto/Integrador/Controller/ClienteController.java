@@ -59,7 +59,7 @@ public class ClienteController {
         this.clienteService.eliminarCliente(cedula);
         return "El cliente con cedula " + cedula + " fue eliminado con exito";
     }
-
+//
     @GetMapping("/cliente/{cedula}")
     @ApiOperation(value = "Obtener un cliente por cédula", response = Cliente.class)
     @ApiResponses(value = {
