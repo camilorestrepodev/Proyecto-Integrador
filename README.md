@@ -23,7 +23,7 @@ server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 ```
 ## Documentación <img align="center" alt="Pruebas" height="40" width="40" src="https://avatars.githubusercontent.com/u/7658037?s=280&v=4">
-La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://proyecto-integrador-production-f4fb.up.railway.app/swagger-ui/index.html).
+La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://proyecto-integrador-production-24c7.up.railway.app/swagger-ui/index.html).
 
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
