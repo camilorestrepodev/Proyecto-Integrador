@@ -1,5 +1,6 @@
 package com.example.Proyecto.Integrador.Model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,11 @@ public class Paquete implements Serializable {
     @JoinColumn
     private Integer idPaquete;
     private String tipoPaquete;
+
+    @ApiModelProperty(value = "El peso del envío en kilogramos")
     private Double peso;
+
+    @ApiModelProperty(value = "El valor declarado del envío")
     private Integer valorDeclarado;
 
     public Paquete() {

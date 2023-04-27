@@ -6,10 +6,7 @@ import com.example.Proyecto.Integrador.Dto.EnvioDtoUpdate;
 import com.example.Proyecto.Integrador.Model.Envio;
 import com.example.Proyecto.Integrador.Model.ErrorResponse;
 import com.example.Proyecto.Integrador.Service.EnvioService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +44,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error interno del servidor", response = ErrorResponse.class)
     })
     @PreAuthorize("hasRole('READ')")
-    public EnvioDto obtenerNumeroGuia(@PathVariable Integer numGuia){
+    public EnvioDto obtenerNumeroGuia(@ApiParam(value = "Este parámetro requiere el número de guía a buscar", required = true)@PathVariable Integer numGuia){
         return this.envioService.obtenerNumeroGuia(numGuia);
     }
 
@@ -65,7 +62,7 @@ public class EnvioController {
     }
 
     @GetMapping("/envio")
-    @ApiOperation(value = "Obtener envío por cedula de empleado y estado de envio", response = Envio.class)
+    @ApiOperation(value = "Obtener envío por cédula de empleado y estado de énvio", response = Envio.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Envíos encontrados exitosamente", response = Envio.class),
             @ApiResponse(code = 404, message = "Envios no encontrados", response = ErrorResponse.class),
@@ -73,7 +70,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error interno del servidor", response = ErrorResponse.class)
     })
     @PreAuthorize("hasRole('READ')")
-    public List<Envio> filtrarPorEstado(@RequestParam ("cedula") Integer cedula, @RequestParam ("estadoEnvio") String estadoEnvio){
+    public List<Envio> filtrarPorEstado(@ApiParam(value = "Este parámetro requiere la cédula del empleado y el estado del envio", required = true)@RequestParam ("cedula") Integer cedula, @RequestParam ("estadoEnvio") String estadoEnvio){
         return this.envioService.filtrarPorEstado(estadoEnvio,cedula);
     }
 

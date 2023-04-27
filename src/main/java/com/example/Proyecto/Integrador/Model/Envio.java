@@ -2,6 +2,7 @@ package com.example.Proyecto.Integrador.Model;
 
 
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +22,29 @@ public class Envio implements Serializable {
     @JoinColumn
     @ManyToOne
     private Cliente cliente;
+
+    @ApiModelProperty(value = "La ciudad de origen del envío")
     private String ciudadOrigen;
+
+    @ApiModelProperty(value = "La ciudad de destino del envío")
     private String ciudadDestino;
+
+    @ApiModelProperty(value = "La dirección de destino del envío")
     private String direccionDestino;
+
+    @ApiModelProperty(value = "El nombre de la persona que recibe el envío")
     private String nombrePersona;
+
+    @ApiModelProperty(value = "El número de teléfono de la persona que recibe el envío")
     private Integer numeroPersona;
+
+
     private String horaEntrega;
+
+    @ApiModelProperty(value = "El estado del envío")
     private String estadoEnvio;
+
+    @ApiModelProperty(value = "El valor del envío")
     private Integer valorEnvio;
     @JoinColumn
     @OneToOne

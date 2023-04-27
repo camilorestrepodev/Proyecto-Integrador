@@ -3,10 +3,7 @@ package com.example.Proyecto.Integrador.Controller;
 import com.example.Proyecto.Integrador.Model.Empleado;
 import com.example.Proyecto.Integrador.Model.ErrorResponse;
 import com.example.Proyecto.Integrador.Service.EmpleadoService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +55,9 @@ public class EmpleadoController {
             @ApiResponse(code = 500, message = "Error interno del servidor",response = ErrorResponse.class)
     })
     @PreAuthorize("hasRole('WRITE')")
-    public String eliminarEmpleado(@PathVariable Integer cedula) {
+    public String eliminarEmpleado(@ApiParam(value = "Este parámetro requiere la cédula del empleado a eliminar", required = true)@PathVariable Integer cedula) {
         this.empleadoService.eliminarEmpleado(cedula);
-        return "El empleado con cedula " + cedula + " fue eliminado con exito";
+        return "El empleado con cédula " + cedula + " fue eliminado con éxito";
     }
 
     @GetMapping("/empleado/{cedula}")
@@ -71,7 +68,7 @@ public class EmpleadoController {
             @ApiResponse(code = 500, message = "Error interno del servidor",response = ErrorResponse.class)
     })
     @PreAuthorize("hasRole('READ')")
-    public Optional<Empleado> obtenerEmpleadoCedula(@PathVariable Integer cedula){
+    public Optional<Empleado> obtenerEmpleadoCedula(@ApiParam(value = "Este parámetro requiere la cédula del empleado a buscar", required = true)@PathVariable Integer cedula){
         return this.empleadoService.obtenerEmpleadoCedula(cedula);
     }
 }

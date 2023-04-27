@@ -36,6 +36,7 @@ public class EnvioService {
         this.empleadoRepository = empleadoRepository;
     }
 
+    // Función para crear énvio
     public EnvioDtoRequest crearEnvio(EnvioDto envioDto) {
         if (envioDto.getCedula() == null ||
                 envioDto.getNombreRemitente() == null ||
@@ -48,34 +49,38 @@ public class EnvioService {
                 envioDto.getValorDeclarado() == null) {
             throw new ApiRequestException("Algunos de los campos ingresados estan vacios");
         }
+
         Optional<Cliente> clienteOptional = this.clienteRepository.findById(envioDto.getCedula());
-        if (clienteOptional.isPresent()) {
-            Paquete paquete = new Paquete();
-            paquete.setTipoPaquete(paquete.asignarTipoPaquete(envioDto.getPeso()));
-            paquete.setPeso(envioDto.getPeso());
-            paquete.setValorDeclarado(envioDto.getValorDeclarado());
-            this.paqueteRepository.save(paquete);
-            Envio envio = new Envio(
-                    clienteOptional.get(),
-                    envioDto.getCiudadOrigen(),
-                    envioDto.getCiudadDestino(),
-                    envioDto.getDireccionDestino(),
-                    envioDto.getNombrePersona(),
-                    envioDto.getNumeroPersona(),
-                    asignarHora(),
-                    "RECIBIDO",
-                    Envio.asignarPrecioEnvio(paquete.getTipoPaquete()),
-                    paquete
-            );
-            Envio envio1 = this.envioRepository.save(envio);
-            envio1.setNumGuia(envio1.getNumGuia());
-            EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest(envio1.getNumGuia(),envio1.getEstadoEnvio());
-            return envioDtoRequest;
-        } else {
+        if (!clienteOptional.isPresent()) {
             throw new ApiRequestException("El cliente con cedula " + envioDto.getCedula() + " debe de estar registrado para poder enviar el paquete.");
         }
+
+        Paquete paquete = new Paquete();
+        paquete.setTipoPaquete(paquete.asignarTipoPaquete(envioDto.getPeso()));
+        paquete.setPeso(envioDto.getPeso());
+        paquete.setValorDeclarado(envioDto.getValorDeclarado());
+        this.paqueteRepository.save(paquete);
+
+        Envio envio = new Envio(
+                clienteOptional.get(),
+                envioDto.getCiudadOrigen(),
+                envioDto.getCiudadDestino(),
+                envioDto.getDireccionDestino(),
+                envioDto.getNombrePersona(),
+                envioDto.getNumeroPersona(),
+                asignarHora(),
+                "RECIBIDO",
+                Envio.asignarPrecioEnvio(paquete.getTipoPaquete()),
+                paquete
+        );
+        Envio envio1 = this.envioRepository.save(envio);
+        envio1.setNumGuia(envio1.getNumGuia());
+        EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest(envio1.getNumGuia(),envio1.getEstadoEnvio());
+        return envioDtoRequest;
     }
 
+
+    //Función para asignar la hora
     public String asignarHora() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
@@ -84,30 +89,48 @@ public class EnvioService {
 
     public EnvioDto obtenerNumeroGuia(Integer numGuia) {
         Optional<Envio> envio = this.envioRepository.findById(numGuia);
+
         if (!envio.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
         }
-        Integer cedula = envio.get().getCliente().getCedula();
-        String nombre = envio.get().getCliente().getNombre();
-        String ciudadOrigen = envio.get().getCiudadOrigen();
-        String ciudadDestino = envio.get().getCiudadDestino();
-        String direccionDestino = envio.get().getDireccionDestino();
-        String nombrePersona = envio.get().getNombrePersona();
-        Integer celular = envio.get().getNumeroPersona();
-        Integer valorDeclarado = envio.get().getPaquete().getValorDeclarado();
-        Double peso = envio.get().getPaquete().getPeso();
-        Integer valorEnvio = envio.get().getValorEnvio();
-        String estadoEnvio = envio.get().getEstadoEnvio();
+
+        Envio envioData = envio.get();
+        Cliente cliente = envioData.getCliente();
+        Paquete paquete = envioData.getPaquete();
+
+        String ciudadOrigen = envioData.getCiudadOrigen();
+        String ciudadDestino = envioData.getCiudadDestino();
+        String direccionDestino = envioData.getDireccionDestino();
+        String nombrePersona = envioData.getNombrePersona();
+        Integer celular = envioData.getNumeroPersona();
+        Integer valorDeclarado = paquete.getValorDeclarado();
+        Double peso = paquete.getPeso();
+        Integer valorEnvio = envioData.getValorEnvio();
+        String estadoEnvio = envioData.getEstadoEnvio();
+
         EnvioDto envioDto = new EnvioDto(
-                cedula, nombre,ciudadOrigen,ciudadDestino,direccionDestino,nombrePersona,celular,peso,estadoEnvio,valorDeclarado);
+                cliente.getCedula(),
+                cliente.getNombre(),
+                ciudadOrigen,
+                ciudadDestino,
+                direccionDestino,
+                nombrePersona,
+                celular,
+                peso,
+                estadoEnvio,
+                valorDeclarado
+        );
+
         if (estadoEnvio.equals("RECIBIDO")) {
-            envio.get().setEstadoEnvio("EN RUTA");
+            envioData.setEstadoEnvio("EN RUTA");
             envioDto.setEstadoEnvio("EN RUTA");
-            this.envioRepository.save(envio.get());
+            this.envioRepository.save(envioData);
         } else {
             envioDto.setEstadoEnvio(estadoEnvio);
         }
+
         envioDto.setValorEnvio(valorEnvio);
+
         return envioDto;
     }
 
@@ -116,16 +139,20 @@ public class EnvioService {
         Integer cedula = envioDtoUpdate.getCedula();
         Optional<Empleado> empleado = this.empleadoRepository.findById(cedula);
         if (!empleado.isPresent()) {
-            throw new ApiRequestException("El empleado con cedula " + cedula + " no existe en nuestra compania");
+            throw new ApiRequestException("El empleado con cedula " + cedula + " no existe en nuestra compañía");
         }
+
         Integer numGuia = envioDtoUpdate.getNumGuia();
         Optional<Envio> envioOptional = this.envioRepository.findById(numGuia);
+
         if (!envioOptional.isPresent()) {
             throw new ApiRequestException("El numero de guia no existe");
         }
+
         String tipoEmpleado = empleado.get().getTipoEmpleado();
         String estadoEnvio = envioDtoUpdate.getEstadoEnvio();
         String estadoEnvioActual = envioOptional.get().getEstadoEnvio();
+
         if (tipoEmpleado.equals("REPARTIDOR") || tipoEmpleado.equals("COORDINADOR")) {
             if (estadoEnvioActual.equals("RECIBIDO") && estadoEnvio.equals("EN RUTA")) {
                 envioOptional.get().setEstadoEnvio(estadoEnvio);
@@ -134,16 +161,18 @@ public class EnvioService {
                 envioOptional.get().setEstadoEnvio(estadoEnvio);
                 this.envioRepository.save(envioOptional.get());
             } else if (estadoEnvioActual.equals("RECIBIDO") && estadoEnvio.equals("ENTREGADO")) {
-                throw new ApiRequestException("el cambio de estado no cumple con las validaciones");
+                throw new ApiRequestException("El cambio de estado no cumple con las validaciones");
             } else {
-                throw new ApiRequestException("El tipo de estado no existe en la base de datos" + estadoEnvio);
+                throw new ApiRequestException("El tipo de estado no existe en la base de datos: " + estadoEnvio);
             }
         } else {
             throw new ApiRequestException("El tipo de empleado no tiene permiso para actualizar el estado del envío");
         }
+
         EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDtoRequest.setNumGuia(envioOptional.get().getNumGuia());
         envioDtoRequest.setEstadoEnvio(envioOptional.get().getEstadoEnvio());
+
         return envioDtoRequest;
     }
 

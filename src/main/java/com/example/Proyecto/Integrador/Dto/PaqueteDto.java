@@ -1,5 +1,7 @@
 package com.example.Proyecto.Integrador.Dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class PaqueteDto implements Serializable {
