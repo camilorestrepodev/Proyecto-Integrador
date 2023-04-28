@@ -41,6 +41,10 @@ Este es el diagrama del modelo entidad-relación para la base de datos MySQL del
 - La tabla **Envio** contiene información sobre los envios, como el numero de guia, ciudad de destino, ciudad origen, dirección destino, estado del envio, hora de entrega, nombre de la persona, numero de la persona, valor del envio.
 - La tabla **Paquete** contiene información sobre los paquetes, como el id del paquete, peso, tipo de paquete y valor declarado.
 
+#Diagrama de clases:
+![DiagramaDeClases drawio](https://user-images.githubusercontent.com/115324147/235146356-1a8e3016-29e0-4d9b-9da6-eed6b22f02b9.png)
+
+
 ## Diagrama del proyecto por paquetes
 
 ```java
@@ -50,8 +54,7 @@ com.example.Proyecto-Integrador
 ├── Controller
 │   ├── ClienteController.java
 │   ├── EmpleadoController.java
-│   ├── EnvioController.java
-│   └── PaqueteController.java
+│   └── EnvioController.java
 ├── Dto
 │   ├── ClienteDto.java
 │   ├── EmpleadoDto.java
@@ -78,8 +81,7 @@ com.example.Proyecto-Integrador
 ├── Service
 │   ├── ClienteService.java
 │   ├── HabitacionService.java
-│   ├── EnvioService.java
-│   └── PaqueteService.java
+│   └── EnvioService.java
 └── ProyectoIntegradorApplication.java
 ```
 
