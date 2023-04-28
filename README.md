@@ -41,8 +41,8 @@ Este es el diagrama del modelo entidad-relación para la base de datos MySQL del
 - La tabla **Envio** contiene información sobre los envios, como el numero de guia, ciudad de destino, ciudad origen, dirección destino, estado del envio, hora de entrega, nombre de la persona, numero de la persona, valor del envio.
 - La tabla **Paquete** contiene información sobre los paquetes, como el id del paquete, peso, tipo de paquete y valor declarado.
 
-#Diagrama de clases:
-![DiagramaDeClases drawio](https://user-images.githubusercontent.com/115324147/235146356-1a8e3016-29e0-4d9b-9da6-eed6b22f02b9.png)
+# Diagrama de clases:
+![DiagramaDeClases drawio](https://user-images.githubusercontent.com/115324147/235146733-488ec151-596b-4776-a90c-7584a60183e2.png)
 
 
 ## Diagrama del proyecto por paquetes
@@ -232,7 +232,7 @@ Ejemplo de petición:
 ## Postman <img align="center" alt="Pruebas" height="40" width="40" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png">
 Para probar los endpoints de la aplicación, se recomienda el uso de la herramienta Postman. Esta herramienta permite hacer peticiones HTTP a la API y recibir las respuestas en tiempo real. 
 
-![postman](https://user-images.githubusercontent.com/115324147/233542888-3c3ecc17-9b61-4d65-a786-6b85f3ae77b5.png)
+![233542888-3c3ecc17-9b61-4d65-a786-6b85f3ae77b5](https://user-images.githubusercontent.com/115324147/235146943-bd0944ef-2306-42fc-a9f3-1372aadef85e.png)
 
 ## Pruebas Unitarias <img align="center" alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
 Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
