@@ -32,6 +32,9 @@ Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para tran
 Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de Envio.
 Cada usuario tiene su rol como `WRITE` o `READ`
 
+# Diagramas:
+![DiagramaDeClases drawio (2)](https://user-images.githubusercontent.com/115324147/235147788-4df623aa-3200-4d38-b44f-0464df5979cb.png)
+
 ## Diagrama del Modelo Entidad-Relación <img align="center" alt="Pruebas" height="40" width="40" src="https://user-images.githubusercontent.com/115324147/233542530-c691174d-7f63-4ea9-8126-c3ecf520b2c2.png">
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
 ![diagrama](https://user-images.githubusercontent.com/115324147/233475114-f72509af-a274-4fa1-9bab-b0669dbea10e.png)
@@ -40,10 +43,6 @@ Este es el diagrama del modelo entidad-relación para la base de datos MySQL del
 - La tabla **Empleado** contiene información sobre los empleados, como su cedula, nombre, apellido, celular, ciudad, correo electronico, dirección, antiguedad, tipo de sangre y tipo de empleado.
 - La tabla **Envio** contiene información sobre los envios, como el numero de guia, ciudad de destino, ciudad origen, dirección destino, estado del envio, hora de entrega, nombre de la persona, numero de la persona, valor del envio.
 - La tabla **Paquete** contiene información sobre los paquetes, como el id del paquete, peso, tipo de paquete y valor declarado.
-
-# Diagramas:
-![DiagramaDeClases drawio (2)](https://user-images.githubusercontent.com/115324147/235147788-4df623aa-3200-4d38-b44f-0464df5979cb.png)
-
 
 ## Diagrama del proyecto por paquetes
 
