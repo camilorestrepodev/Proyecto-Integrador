@@ -41,7 +41,7 @@ Este es el diagrama del modelo entidad-relación para la base de datos MySQL del
 - La tabla **Envio** contiene información sobre los envios, como el numero de guia, ciudad de destino, ciudad origen, dirección destino, estado del envio, hora de entrega, nombre de la persona, numero de la persona, valor del envio.
 - La tabla **Paquete** contiene información sobre los paquetes, como el id del paquete, peso, tipo de paquete y valor declarado.
 
-# Diagrama de clases:
+# Diagramas:
 ![DiagramaDeClases drawio (2)](https://user-images.githubusercontent.com/115324147/235147788-4df623aa-3200-4d38-b44f-0464df5979cb.png)
 
 
