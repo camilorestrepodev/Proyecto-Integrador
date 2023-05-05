@@ -356,12 +356,12 @@ class EnvioServiceTest {
         Envio envio = new Envio();
         envio.setEstadoEnvio(estadoEnvio);
         envios.add(envio);
-        Mockito.when(envioRepository.envioPorEstado(estadoEnvio.getName())).thenReturn(envios);
+        Mockito.when(envioRepository.envioPorEstado(estadoEnvio)).thenReturn(envios);
 
         List<Envio> result = envioService.filtrarPorEstado(estadoEnvio, cedula);
 
         verify(empleadoRepository, Mockito.times(1)).findById(cedula);
-        verify(envioRepository, Mockito.times(1)).envioPorEstado(estadoEnvio.getName());
+        verify(envioRepository, Mockito.times(1)).envioPorEstado(estadoEnvio);
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals(envio, result.get(0));
     }

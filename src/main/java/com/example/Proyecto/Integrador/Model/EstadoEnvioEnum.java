@@ -2,7 +2,7 @@ package com.example.Proyecto.Integrador.Model;
 
 public enum EstadoEnvioEnum {
     RECIBIDO("RECIBIDO"),
-    RUTA("RUTA"),
+    RUTA("EN RUTA"),
     ENTREGADO("ENTREGADO");
 
     private final String name;

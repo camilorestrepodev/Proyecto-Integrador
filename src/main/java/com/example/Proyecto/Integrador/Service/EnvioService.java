@@ -143,7 +143,7 @@ public class EnvioService {
         if (!empleado.isPresent()) {
             throw new ApiRequestException("La cedula del empleado no existe");
         }
-        return this.envioRepository.envioPorEstado(estadoEnvio.getName());
+        return this.envioRepository.envioPorEstado(estadoEnvio);
     }
 }
 

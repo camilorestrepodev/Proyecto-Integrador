@@ -11,10 +11,10 @@ import java.io.Serializable;
 @Setter
 @Getter
 public class EnvioDto implements Serializable {
-    @ApiModelProperty(value = "La cédula del remitente", example = "1234567890", required = true)
+    @ApiModelProperty(value = "La cédula del remitente", example = "12345", required = true)
     private Integer cedula;
 
-    @ApiModelProperty(value = "El nombre del remitente", example = "Juan Pérez", required = true)
+    @ApiModelProperty(value = "El nombre del remitente", example = "Mateo", required = true)
     private String nombreRemitente;
 
     @ApiModelProperty(value = "La ciudad de origen del envío", example = "Bogotá", required = true)
@@ -29,19 +29,17 @@ public class EnvioDto implements Serializable {
     @ApiModelProperty(value = "El nombre de la persona que recibe el envío", example = "María Pérez", required = true)
     private String nombrePersona;
 
-    @ApiModelProperty(value = "El número de teléfono de la persona que recibe el envío", example = "3214567890", required = true)
+    @ApiModelProperty(value = "El número de teléfono de la persona que recibe el envío", example = "32145", required = true)
     private Integer numeroPersona;
 
     @ApiModelProperty(value = "El peso del envío en kilogramos", example = "2.5", required = true)
     private Double peso;
 
-    @ApiModelProperty(value = "El estado del envío", example = "En tránsito", required = true)
     private EstadoEnvioEnum estadoEnvio;
 
-    @ApiModelProperty(value = "El valor declarado del envío", example = "100000", required = true)
+    @ApiModelProperty(value = "El valor declarado del envío", example = "15000", required = true)
     private Integer valorDeclarado;
 
-    @ApiModelProperty(value = "El valor del envío", example = "50000", required = true)
     private Integer valorEnvio;
 
     public EnvioDto() {

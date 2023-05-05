@@ -40,11 +40,9 @@ public class Envio implements Serializable {
 
     private String horaEntrega;
 
-    @ApiModelProperty(value = "El estado del envío")
     @Enumerated(EnumType.STRING)
     private EstadoEnvioEnum estadoEnvio;
 
-    @ApiModelProperty(value = "El valor del envío")
     private Integer valorEnvio;
     @JoinColumn
     @OneToOne
