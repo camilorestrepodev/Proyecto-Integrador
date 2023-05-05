@@ -10,7 +10,7 @@ public class ClienteDto implements Serializable {
     private String correoElectronico;
     private String direccion;
     private String ciudad;
-
+    //
     public ClienteDto() {
     }
 
