@@ -1,6 +1,7 @@
 package com.example.Proyecto.Integrador.Dto;
 
 
+import com.example.Proyecto.Integrador.Model.EstadoEnvioEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +36,7 @@ public class EnvioDto implements Serializable {
     private Double peso;
 
     @ApiModelProperty(value = "El estado del envío", example = "En tránsito", required = true)
-    private String estadoEnvio;
+    private EstadoEnvioEnum estadoEnvio;
 
     @ApiModelProperty(value = "El valor declarado del envío", example = "100000", required = true)
     private Integer valorDeclarado;
@@ -46,7 +47,7 @@ public class EnvioDto implements Serializable {
     public EnvioDto() {
     }
 
-    public EnvioDto(Integer cedula, String nombreRemitente, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersona, Integer numeroPersona, Double peso, String estadoEnvio, Integer valorDeclarado) {
+    public EnvioDto(Integer cedula, String nombreRemitente, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersona, Integer numeroPersona, Double peso, EstadoEnvioEnum estadoEnvio, Integer valorDeclarado) {
         this.cedula = cedula;
         this.nombreRemitente = nombreRemitente;
         this.ciudadOrigen = ciudadOrigen;

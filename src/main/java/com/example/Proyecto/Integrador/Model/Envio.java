@@ -38,11 +38,11 @@ public class Envio implements Serializable {
     @ApiModelProperty(value = "El número de teléfono de la persona que recibe el envío")
     private Integer numeroPersona;
 
-
     private String horaEntrega;
 
     @ApiModelProperty(value = "El estado del envío")
-    private String estadoEnvio;
+    @Enumerated(EnumType.STRING)
+    private EstadoEnvioEnum estadoEnvio;
 
     @ApiModelProperty(value = "El valor del envío")
     private Integer valorEnvio;
@@ -53,7 +53,7 @@ public class Envio implements Serializable {
     public Envio() {
     }
 
-    public Envio( Cliente cliente, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersona, Integer numeroPersona, String horaEntrega, String estadoEnvio, Integer valorEnvio, Paquete paquete) {
+    public Envio( Cliente cliente, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersona, Integer numeroPersona, String horaEntrega, EstadoEnvioEnum estadoEnvio, Integer valorEnvio, Paquete paquete) {
         this.cliente = cliente;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
@@ -67,13 +67,13 @@ public class Envio implements Serializable {
     }
 
 
-    public static Integer asignarPrecioEnvio(String tipo) {
-        switch (tipo) {
-            case "GRANDE":
+    public static Integer asignarPrecioEnvio(TipoPaqueteEnum tipoPaqueteEnum) {
+        switch (tipoPaqueteEnum) {
+            case GRANDE:
                 return 50000;
-            case "MEDIANO":
+            case MEDIANO:
                 return 40000;
-            case "LIVIANO":
+            case LIVIANO:
                 return 30000;
             default:
                 throw new ApiRequestException("El tipo de paquete no corresponde");

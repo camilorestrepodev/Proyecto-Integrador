@@ -1,5 +1,6 @@
 package com.example.Proyecto.Integrador.Dto;
 
+import com.example.Proyecto.Integrador.Model.EstadoEnvioEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,6 @@ public class EnvioDtoUpdate {
     private Integer numGuia;
 
     @ApiModelProperty(value = "El estado del envío", example = "EN RUTA")
-    private String estadoEnvio;
+    private EstadoEnvioEnum estadoEnvio;
 
 }

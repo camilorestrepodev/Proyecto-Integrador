@@ -1,11 +1,8 @@
 package com.example.Proyecto.Integrador;
 
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
-import com.example.Proyecto.Integrador.Model.Cliente;
 import com.example.Proyecto.Integrador.Model.Empleado;
-import com.example.Proyecto.Integrador.Repository.ClienteRepository;
 import com.example.Proyecto.Integrador.Repository.EmpleadoRepository;
-import com.example.Proyecto.Integrador.Service.ClienteService;
 import com.example.Proyecto.Integrador.Service.EmpleadoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -17,7 +17,8 @@ public class Paquete implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn
     private Integer idPaquete;
-    private String tipoPaquete;
+    @Enumerated(EnumType.STRING)
+    private TipoPaqueteEnum tipoPaquete;
 
     @ApiModelProperty(value = "El peso del envío en kilogramos")
     private Double peso;
@@ -28,19 +29,19 @@ public class Paquete implements Serializable {
     public Paquete() {
     }
 
-    public Paquete(String tipoPaquete, Double peso, Integer valorDeclarado) {
+    public Paquete(TipoPaqueteEnum tipoPaquete, Double peso, Integer valorDeclarado) {
         this.tipoPaquete = tipoPaquete;
         this.peso = peso;
         this.valorDeclarado = valorDeclarado;
     }
 
-    public String asignarTipoPaquete(Double peso) {
+    public static TipoPaqueteEnum asignarTipoPaquete(Double peso) {
         if (peso < 2.0) {
-            return "LIVIANO";
+            return TipoPaqueteEnum.LIVIANO;
         } else if (peso > 2.0 && peso < 5.0) {
-            return "MEDIANO";
+            return TipoPaqueteEnum.MEDIANO;
         }
-        return "GRANDE";
+        return TipoPaqueteEnum.GRANDE;
     }
 
 

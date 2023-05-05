@@ -5,6 +5,7 @@ import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
 import com.example.Proyecto.Integrador.Dto.EnvioDtoUpdate;
 import com.example.Proyecto.Integrador.Model.Envio;
 import com.example.Proyecto.Integrador.Model.ErrorResponse;
+import com.example.Proyecto.Integrador.Model.EstadoEnvioEnum;
 import com.example.Proyecto.Integrador.Service.EnvioService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class EnvioController {
             @ApiResponse(code = 500, message = "Error interno del servidor", response = ErrorResponse.class)
     })
     @PreAuthorize("hasRole('READ')")
-    public List<Envio> filtrarPorEstado(@ApiParam(value = "Este parámetro requiere la cédula del empleado y el estado del envio", required = true)@RequestParam ("cedula") Integer cedula, @RequestParam ("estadoEnvio") String estadoEnvio){
+    public List<Envio> filtrarPorEstado(@ApiParam(value = "Este parámetro requiere la cédula del empleado y el estado del envio", required = true)@RequestParam ("cedula") Integer cedula, @RequestParam ("estadoEnvio") EstadoEnvioEnum estadoEnvio){
         return this.envioService.filtrarPorEstado(estadoEnvio,cedula);
     }
 

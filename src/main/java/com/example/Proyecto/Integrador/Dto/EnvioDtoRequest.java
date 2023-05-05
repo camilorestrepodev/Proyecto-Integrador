@@ -1,5 +1,6 @@
 package com.example.Proyecto.Integrador.Dto;
 
+import com.example.Proyecto.Integrador.Model.EstadoEnvioEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,12 +8,12 @@ import lombok.Setter;
 @Setter
 public class EnvioDtoRequest {
     private Integer numGuia;
-    private String estadoEnvio;
+    private EstadoEnvioEnum estadoEnvio;
 
     public EnvioDtoRequest() {
     }
 
-    public EnvioDtoRequest(Integer numGuia, String estadoEnvio) {
+    public EnvioDtoRequest(Integer numGuia, EstadoEnvioEnum estadoEnvio) {
         this.numGuia = numGuia;
         this.estadoEnvio = estadoEnvio;
     }

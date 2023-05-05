@@ -4,10 +4,7 @@ import com.example.Proyecto.Integrador.Dto.EnvioDto;
 import com.example.Proyecto.Integrador.Dto.EnvioDtoRequest;
 import com.example.Proyecto.Integrador.Dto.EnvioDtoUpdate;
 import com.example.Proyecto.Integrador.Exception.ApiRequestException;
-import com.example.Proyecto.Integrador.Model.Cliente;
-import com.example.Proyecto.Integrador.Model.Empleado;
-import com.example.Proyecto.Integrador.Model.Envio;
-import com.example.Proyecto.Integrador.Model.Paquete;
+import com.example.Proyecto.Integrador.Model.*;
 import com.example.Proyecto.Integrador.Repository.ClienteRepository;
 import com.example.Proyecto.Integrador.Repository.EmpleadoRepository;
 import com.example.Proyecto.Integrador.Repository.EnvioRepository;
@@ -63,7 +60,7 @@ class EnvioServiceTest {
         when(clienteRepository.findById(anyInt())).thenReturn(Optional.of(cliente));
 
         Paquete paquete = new Paquete();
-        paquete.setTipoPaquete("RECIBIDO");
+        paquete.setTipoPaquete(TipoPaqueteEnum.LIVIANO);
         when(paqueteRepository.save(any(Paquete.class))).thenReturn(paquete);
 
         Envio envio = new Envio();
@@ -107,7 +104,7 @@ class EnvioServiceTest {
         when(clienteRepository.findById(9999)).thenReturn(Optional.of(cliente));
 
         Paquete paquete = new Paquete();
-        paquete.setTipoPaquete("RECIBIDO");
+        paquete.setTipoPaquete(TipoPaqueteEnum.LIVIANO);
         when(paqueteRepository.save(any(Paquete.class))).thenReturn(paquete);
 
         Envio envio = new Envio();
@@ -143,7 +140,7 @@ class EnvioServiceTest {
         Cliente cliente = new Cliente();
         Paquete paquete = new Paquete();
         Envio envio = new Envio(cliente, "Bogotá", "Medellín",
-                "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
+                "Cra 40 # 123", "Maria", 1234567890, "10:10", EstadoEnvioEnum.RECIBIDO, 50000, paquete);
         envio.setNumGuia(numGuia);
         when(envioRepository.findById(numGuia)).thenReturn(Optional.of(envio));
 
@@ -173,7 +170,7 @@ class EnvioServiceTest {
         // Arrange
         Empleado empleado = new Empleado();
         empleado.setCedula(123);
-        empleado.setTipoEmpleado("REPARTIDOR");
+        empleado.setTipoEmpleado(TipoEmpleadoEnum.REPARTIDOR);
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         Paquete paquete = new Paquete();
@@ -183,13 +180,13 @@ class EnvioServiceTest {
                 "Cra 40 # 123",
                 "Maria", 1234567890,
                 "10:10",
-                "RECIBIDO",
+                EstadoEnvioEnum.RECIBIDO,
                 50000,
                 paquete);
         EnvioDtoUpdate envioDtoUpdate = new EnvioDtoUpdate();
         envioDtoUpdate.setNumGuia(envio.getNumGuia());
         envioDtoUpdate.setCedula(empleado.getCedula());
-        envioDtoUpdate.setEstadoEnvio("EN RUTA");
+        envioDtoUpdate.setEstadoEnvio(EstadoEnvioEnum.RUTA);
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
         when(envioRepository.findById(envio.getNumGuia())).thenReturn(Optional.of(envio));
@@ -209,17 +206,17 @@ class EnvioServiceTest {
         // Arrange
         Empleado empleado = new Empleado();
         empleado.setCedula(123);
-        empleado.setTipoEmpleado("COORDINADOR");
+        empleado.setTipoEmpleado(TipoEmpleadoEnum.COORDINADOR);
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         Paquete paquete = new Paquete();
         paquete.setIdPaquete(12);
         Envio envio = new Envio(cliente, "Bogotá", "Medellín",
-                "Cra 40 # 123", "Maria", 1234567890, "10:10", "RECIBIDO", 50000, paquete);
+                "Cra 40 # 123", "Maria", 1234567890, "10:10", EstadoEnvioEnum.RECIBIDO, 50000, paquete);
         EnvioDto envioDto = new EnvioDto();
         EnvioDtoRequest envioDtoRequest = new EnvioDtoRequest();
         envioDto.setCedula(null);
-        envioDto.setEstadoEnvio("ENTREGADO");
+        envioDto.setEstadoEnvio(EstadoEnvioEnum.ENTREGADO);
         envioDtoRequest.setNumGuia(1234);
         EnvioDtoUpdate envioDtoUpdate = new EnvioDtoUpdate();
 
@@ -239,7 +236,7 @@ class EnvioServiceTest {
         // Arrange
         Empleado empleado = new Empleado();
         empleado.setCedula(12345);
-        empleado.setTipoEmpleado("COORDINADOR");
+        empleado.setTipoEmpleado(TipoEmpleadoEnum.COORDINADOR);
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         Paquete paquete = new Paquete();
@@ -251,14 +248,14 @@ class EnvioServiceTest {
                 "Maria",
                 1234567890,
                 "10:10",
-                "RECIBIDO",
+                EstadoEnvioEnum.RECIBIDO,
                 50000,
                 paquete);
         envio.setNumGuia(12345);
         EnvioDtoUpdate envioDtoUpdate = new EnvioDtoUpdate();
         envioDtoUpdate.setCedula(empleado.getCedula());
         envioDtoUpdate.setNumGuia(123456);
-        envioDtoUpdate.setEstadoEnvio("ENTREGADO");
+        envioDtoUpdate.setEstadoEnvio(EstadoEnvioEnum.ENTREGADO);
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
         when(envioRepository.findById(9999)).thenReturn(Optional.of(envio));
@@ -276,7 +273,7 @@ class EnvioServiceTest {
         // Arrange
         Empleado empleado = new Empleado();
         empleado.setCedula(123);
-        empleado.setTipoEmpleado("COORDINADOR");
+        empleado.setTipoEmpleado(TipoEmpleadoEnum.COORDINADOR);
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         Paquete paquete = new Paquete();
@@ -288,13 +285,13 @@ class EnvioServiceTest {
                 "Maria",
                 1234567890,
                 "10:10",
-                "RECIBIDO",
+                EstadoEnvioEnum.RECIBIDO,
                 50000,
                 paquete);
         EnvioDtoUpdate envioDtoUpdate = new EnvioDtoUpdate();
         envioDtoUpdate.setCedula(empleado.getCedula());
         envioDtoUpdate.setNumGuia(envio.getNumGuia());
-        envioDtoUpdate.setEstadoEnvio("ENTREGADO");
+        envioDtoUpdate.setEstadoEnvio(EstadoEnvioEnum.ENTREGADO);
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
         when(envioRepository.findById(envio.getNumGuia())).thenReturn(Optional.of(envio));
@@ -313,7 +310,7 @@ class EnvioServiceTest {
         // Arrange
         Empleado empleado = new Empleado();
         empleado.setCedula(123);
-        empleado.setTipoEmpleado("COORDINADOR");
+        empleado.setTipoEmpleado(TipoEmpleadoEnum.COORDINADOR);
         Cliente cliente = new Cliente();
         cliente.setCedula(1);
         Paquete paquete = new Paquete();
@@ -325,13 +322,13 @@ class EnvioServiceTest {
                 "Maria",
                 1234567890,
                 "10:10",
-                "EN RUTA",
+                EstadoEnvioEnum.RUTA,
                 50000,
                 paquete);
         EnvioDtoUpdate envioDtoUpdate = new EnvioDtoUpdate();
         envioDtoUpdate.setCedula(empleado.getCedula());
         envioDtoUpdate.setNumGuia(envio.getNumGuia());
-        envioDtoUpdate.setEstadoEnvio("ENTREGADO");
+        envioDtoUpdate.setEstadoEnvio(EstadoEnvioEnum.ENTREGADO);
 
         when(empleadoRepository.findById(empleado.getCedula())).thenReturn(Optional.of(empleado));
         when(envioRepository.findById(envio.getNumGuia())).thenReturn(Optional.of(envio));
@@ -349,7 +346,7 @@ class EnvioServiceTest {
     @Test
     void filtrarPorEstadoExitosamente() {
         Integer cedula = 123456789;
-        String estadoEnvio = "ENTREGADO";
+        EstadoEnvioEnum estadoEnvio = EstadoEnvioEnum.ENTREGADO;
 
         Empleado empleado = new Empleado();
         empleado.setCedula(cedula);
@@ -359,12 +356,12 @@ class EnvioServiceTest {
         Envio envio = new Envio();
         envio.setEstadoEnvio(estadoEnvio);
         envios.add(envio);
-        Mockito.when(envioRepository.envioPorEstado(estadoEnvio)).thenReturn(envios);
+        Mockito.when(envioRepository.envioPorEstado(estadoEnvio.getName())).thenReturn(envios);
 
         List<Envio> result = envioService.filtrarPorEstado(estadoEnvio, cedula);
 
         verify(empleadoRepository, Mockito.times(1)).findById(cedula);
-        verify(envioRepository, Mockito.times(1)).envioPorEstado(estadoEnvio);
+        verify(envioRepository, Mockito.times(1)).envioPorEstado(estadoEnvio.getName());
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals(envio, result.get(0));
     }
@@ -372,7 +369,7 @@ class EnvioServiceTest {
     @Test
     void filtrarPorEstadoEmpleadoNoExiste() {
         Integer cedula = 123456789;
-        String estadoEnvio = "ENTREGADO";
+        EstadoEnvioEnum estadoEnvio = EstadoEnvioEnum.ENTREGADO;
 
         when(empleadoRepository.findById(123)).thenReturn(Optional.empty());
         ApiRequestException thrown = assertThrows(
