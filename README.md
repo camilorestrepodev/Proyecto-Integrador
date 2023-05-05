@@ -35,6 +35,9 @@ Cada usuario tiene su rol como `WRITE` o `READ`
 # Diagramas:
 ![DiagramaDeClases drawio (2)](https://user-images.githubusercontent.com/115324147/235147788-4df623aa-3200-4d38-b44f-0464df5979cb.png)
 
+# Diagrama de paquetes:
+![Diagrama](https://user-images.githubusercontent.com/115324147/236377175-f9b187e6-caa1-413c-b807-4047c8da6d11.svg)
+
 ## Diagrama del Modelo Entidad-Relación <img align="center" alt="Pruebas" height="40" width="40" src="https://user-images.githubusercontent.com/115324147/233542530-c691174d-7f63-4ea9-8126-c3ecf520b2c2.png">
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
 ![diagrama](https://user-images.githubusercontent.com/115324147/233475114-f72509af-a274-4fa1-9bab-b0669dbea10e.png)
