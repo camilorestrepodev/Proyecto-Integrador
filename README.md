@@ -1,6 +1,6 @@
 # Proyecto de Mensajería Express <img alt="Java" height="40" width="40" src="https://media.giphy.com/media/KeJXqoqlUE2NSHUYER/giphy.gif">
 
-Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Cliente, Empleado, Envío y Paquete. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
+Este es un proyecto de mensajería express que utiliza Java y Spring para crear un sistema de seguimiento y gestión de envíos. El proyecto utiliza una base de datos MySQL con un modelo entidad-relación, y documentación en Swagger para especificar los endpoints de los microservicios. También utiliza el patrón de diseño DTO, pruebas unitarias con Mockito y JUnit, Lombok, y está dividido en microservicios para Cliente, Empleado y Envío. La integración continua se realiza con GitHub y el despliegue se realiza en Railway.
 
 <div align="center" > <img alt="logo" height="100" width="400" align="center" src="https://user-images.githubusercontent.com/115324147/233528141-8f02ce04-0c5a-49c6-9c07-072e909bec20.png">
 </div>
@@ -23,7 +23,7 @@ server.port=8080
 spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 ```
 ## Documentación <img align="center" alt="Pruebas" height="40" width="40" src="https://avatars.githubusercontent.com/u/7658037?s=280&v=4">
-La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://proyecto-integrador-production-f4fb.up.railway.app/swagger-ui/index.html).
+La documentación de la API se genera automáticamente con Swagger. Para acceder a la documentación, abra un navegador web y vaya a [Documentación Swagger](https://proyecto-integrador-production-24c7.up.railway.app/swagger-ui/index.html).
 
 ## Patrón de Diseño
 Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para transferir datos entre las diferentes capas de la aplicación. Los DTO son objetos simples que contienen campos y métodos de acceso, y se utilizan para transferir datos entre los controladores y los servicios.
@@ -31,6 +31,13 @@ Este proyecto utiliza el patrón de diseño DTO (Data Transfer Object) para tran
 ## Autenticación y autorización seguridad <img align="center" alt="Pruebas" height="60" width="60" src="https://pbs.twimg.com/profile_images/1235983944463585281/AWCKLiJh_400x400.png">
 Se utiliza Spring Security para la autenticación y autorización de los usuarios. Solo los usuarios autenticados tienen acceso a las funcionalidades de Envio.
 Cada usuario tiene su rol como `WRITE` o `READ`
+
+# Diagramas:
+![DiagramaDeClases drawio (2)](https://user-images.githubusercontent.com/115324147/235147788-4df623aa-3200-4d38-b44f-0464df5979cb.png)
+
+# Diagrama de clases:
+<img src="https://user-images.githubusercontent.com/115324147/236378315-f2af3316-a11b-4744-be9c-7cdd337f3721.png">
+<p align="center"> Modelo de Clases UML <i>(Clic en la imagen para verla en mayor detalle)</i></p>
 
 ## Diagrama del Modelo Entidad-Relación <img align="center" alt="Pruebas" height="40" width="40" src="https://user-images.githubusercontent.com/115324147/233542530-c691174d-7f63-4ea9-8126-c3ecf520b2c2.png">
 Este es el diagrama del modelo entidad-relación para la base de datos MySQL del proyecto de sistema de reservas:
@@ -50,8 +57,7 @@ com.example.Proyecto-Integrador
 ├── Controller
 │   ├── ClienteController.java
 │   ├── EmpleadoController.java
-│   ├── EnvioController.java
-│   └── PaqueteController.java
+│   └── EnvioController.java
 ├── Dto
 │   ├── ClienteDto.java
 │   ├── EmpleadoDto.java
@@ -78,8 +84,7 @@ com.example.Proyecto-Integrador
 ├── Service
 │   ├── ClienteService.java
 │   ├── HabitacionService.java
-│   ├── EnvioService.java
-│   └── PaqueteService.java
+│   └── EnvioService.java
 └── ProyectoIntegradorApplication.java
 ```
 
@@ -230,7 +235,7 @@ Ejemplo de petición:
 ## Postman <img align="center" alt="Pruebas" height="40" width="40" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png">
 Para probar los endpoints de la aplicación, se recomienda el uso de la herramienta Postman. Esta herramienta permite hacer peticiones HTTP a la API y recibir las respuestas en tiempo real. 
 
-![postman](https://user-images.githubusercontent.com/115324147/233542888-3c3ecc17-9b61-4d65-a786-6b85f3ae77b5.png)
+![233542888-3c3ecc17-9b61-4d65-a786-6b85f3ae77b5](https://user-images.githubusercontent.com/115324147/235146943-bd0944ef-2306-42fc-a9f3-1372aadef85e.png)
 
 ## Pruebas Unitarias <img align="center" alt="Pruebas" height="40" width="40" src="https://media.giphy.com/media/1sMGC0XjA1Hk58wppo/giphy.gif">
 Se han incluido pruebas unitarias utilizando Mockito y JUnit para asegurar que los microservicios de Cliente, Habitación y Reserva funcionan correctamente.
